@@ -73,6 +73,7 @@ const App = () => {
 	};
 
 	const logout = () => {
+		window.localStorage.removeItem('token');
 		window.location.hash = '#';
 		setAuth({});
 	};
