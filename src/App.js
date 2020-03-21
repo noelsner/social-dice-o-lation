@@ -138,7 +138,7 @@ const App = ()=> {
               <div>
                 <h2> <a href='#view=cart'>Cart</a> </h2>
                 <h2> <a href='#view=orders'>Orders</a> </h2>
-                <Products addToCart={ addToCart } products={ products } />
+                <Products addToCart={ addToCart } products={ products } lineItems = {lineItems} />
               </div>
             )
           }

@@ -32,7 +32,8 @@ const sync = async()=> {
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
       name VARCHAR(100) NOT NULL UNIQUE,
       price DECIMAL NOT NULL,
-      CHECK (char_length(name) > 0)
+      CHECK (char_length(name) > 0),
+      qty INT NOT NULL DEFAULT 5
     );
     CREATE TABLE orders(
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
