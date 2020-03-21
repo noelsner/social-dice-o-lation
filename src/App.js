@@ -5,6 +5,7 @@ import Login from './Login';
 import Orders from './Orders';
 import Cart from './Cart';
 import Products from './Products';
+import ProductDetailsPage from './ProductDetailsPage';
 
 const headers = () => {
   const token = window.localStorage.getItem('token');
@@ -128,6 +129,7 @@ const App = () => {
   } else {
     return (
       <div>
+<<<<<<< HEAD
         <h1>
           {' '}
           <a href="#">Foo, Bar, Bazz.. etc Store</a>{' '}
@@ -166,6 +168,46 @@ const App = () => {
               <Orders lineItems={lineItems} products={products} orders={orders} />
             </div>
           )}
+=======
+        <h1> <a href='#'>Foo, Bar, Bazz.. etc Store</a> </h1>
+        <button onClick={ logout }>Logout { auth.username } </button>
+        <div className='horizontal'>
+          {
+            !view && (
+              <div>
+                <h2> <a href='#view=cart'>Cart</a> </h2>
+                <h2> <a href='#view=orders'>Orders</a> </h2>
+                <Products addToCart={ addToCart } products={ products } />
+              </div>
+            )
+          }
+
+          {
+            view === 'cart' && (
+              <div>
+                <h1> CART PAGE </h1>
+                <Cart lineItems={ lineItems } removeFromCart={ removeFromCart } cart={ cart } createOrder={ createOrder } products={ products }/>
+              </div>
+            )
+          }
+
+          {
+            view === 'orders' && (
+              <div>
+                <Orders lineItems={ lineItems } products={ products } orders={ orders }/>
+              </div>
+            )
+          }
+
+          {
+            view === 'product' && (
+              <div>
+                <ProductDetailsPage product={ products.find(product => product.id === params.id)} />
+              </div>
+            )
+          }
+
+>>>>>>> 20c42c51e400ddc97c59c69d9bdfa4fea52248d6
         </div>
       </div>
     );

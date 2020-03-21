@@ -10,7 +10,7 @@ const Products = ({ products, addToCart })=> {
             return (
               <li key={ product.id }>
                 <span>
-                { product.name }
+                <a href={`#view=product&id=${product.id}`}>{ product.name }</a>
                 </span>
                 <span>
                 ${
