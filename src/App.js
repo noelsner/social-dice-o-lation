@@ -131,7 +131,7 @@ const App = ()=> {
         <h1>Foo, Bar, Bazz.. etc Store</h1>
         <button onClick={ logout }>Logout { auth.username } </button>
         <div className='horizontal'>
-          <Products addToCart={ addToCart } products={ products } />
+          <Products addToCart={ addToCart } products={ products } lineItems = {lineItems} />
           <Cart lineItems={ lineItems } removeFromCart={ removeFromCart } cart={ cart } createOrder={ createOrder } products={ products }/>
           <Orders lineItems={ lineItems } products={ products } orders={ orders }/>
         </div>
