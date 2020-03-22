@@ -6,6 +6,7 @@ import Orders from './Orders';
 import Cart from './Cart';
 import Products from './Products';
 import ProductDetailsPage from './ProductDetailsPage';
+import MyNavbar from './Navbar';
 
 const headers = () => {
   const token = window.localStorage.getItem('token');
@@ -129,14 +130,11 @@ const App = () => {
   } else {
     return (
       <div>
-        <h1> <a href='#'>Foo, Bar, Bazz.. etc Store</a> </h1>
-        <button onClick={logout}>Logout {auth.username} </button>
+        <MyNavbar lineItems={ lineItems } logout={logout} auth={auth} />
         <div className='horizontal'>
           {
             !view && (
               <div>
-                <h2> <a href='#view=cart'>Cart</a> </h2>
-                <h2> <a href='#view=orders'>Orders</a> </h2>
                 <Products addToCart={ addToCart } products={ products } lineItems = {lineItems} />
               </div>
             )
