@@ -1,5 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 const MyNavbar = ({ lineItems, logout, auth }) => {
   return (
@@ -16,7 +18,7 @@ const MyNavbar = ({ lineItems, logout, auth }) => {
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={logout} className='dropdown-item'>Logout {auth.username}</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href='#view=cart'>Cart({lineItems.length})</Nav.Link>
+            <Nav.Link href='#view=cart'><FontAwesomeIcon icon={faShoppingCart} />({lineItems.length})</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </div>

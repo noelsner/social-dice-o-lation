@@ -33,7 +33,9 @@ const sync = async()=> {
       name VARCHAR(100) NOT NULL UNIQUE,
       price DECIMAL NOT NULL,
       CHECK (char_length(name) > 0),
-      qty INT NOT NULL DEFAULT 5
+      qty INT NOT NULL DEFAULT 5,
+      "imageURL" VARCHAR(300) DEFAULT 'https://image.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-260nw-1037719192.jpg',
+      description VARCHAR(300) DEFAULT 'No description available.'
     );
     CREATE TABLE orders(
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -71,19 +73,27 @@ const sync = async()=> {
   const _products = {
     foo: {
       name: 'foo',
-      price: 2
+      price: 2,
+      imageURL: 'https://www.sprintcenter.com/assets/img/10.12.18-Foo-Fighters-v2-1280x500-8943f0481c.jpg',
+      description: 'An term used for unimportant variables in programming when the programmer is too lazy to think of an actual name.'
     },
     bar: {
       name: 'bar',
-      price: 2
+      price: 2,
+      imageURL: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80',
+      description: 'A counter across which alcoholic drinks or refreshments are served.'
     },
     bazz: {
       name: 'bazz',
-      price: 2.50
+      price: 2.50,
+      imageURL: 'https://i.imgur.com/QhPuoW2.jpg',
+      description: 'An term used for unimportant variables in programming when the programmer is too lazy to think of an actual name.'
     },
     quq: {
       name: 'quq',
-      price: 11.99 
+      price: 11.99,
+      imageURL: 'https://upload.wikimedia.org/wikipedia/en/4/44/Spike_Milligan%27s_Q_Logo.png',
+      description: 'An term used for unimportant variables in programming when the programmer is too lazy to think of an actual name.'
     }
   };
   const [lucy, moe] = await Promise.all(Object.values(_users).map( user => users.create(user)));
