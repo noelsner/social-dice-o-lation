@@ -33,7 +33,6 @@ const sync = async()=> {
       name VARCHAR(100) NOT NULL UNIQUE,
       price DECIMAL NOT NULL,
       CHECK (char_length(name) > 0),
-      description VARCHAR (500),
       qty INT NOT NULL DEFAULT 5
     );
     CREATE TABLE orders(
@@ -72,23 +71,19 @@ const sync = async()=> {
   const _products = {
     foo: {
       name: 'foo',
-      price: 2,
-      description: 'this is the product description for foo. This will be a block of text when we input real products, becuause what is a foo?'
+      price: 2
     },
     bar: {
       name: 'bar',
-      price: 2,
-      description: 'A counter across which alcoholic drinks or refreshments are served. Also, a long rod or rigid piece of wood, metal, or similar material, typically used as an obstruction, fastening, or weapon.'
+      price: 2
     },
     bazz: {
       name: 'bazz',
-      price: 2.50,
-      description: 'this is the product description for bazz. This will be a block of text when we input real products, becuause what is a bazz?'
+      price: 2.50
     },
     quq: {
       name: 'quq',
-      price: 11.99,
-      description: 'this is the product description for quq. This will be a block of text when we input real products, becuause what is a quq?' 
+      price: 11.99
     }
   };
   const [lucy, moe] = await Promise.all(Object.values(_users).map( user => users.create(user)));
