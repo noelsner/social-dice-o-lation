@@ -83,7 +83,7 @@ const sync = async()=> {
     },
     quq: {
       name: 'quq',
-      price: 11.99
+      price: 11.99 
     }
   };
   const [lucy, moe] = await Promise.all(Object.values(_users).map( user => users.create(user)));
