@@ -38,17 +38,46 @@ li {
   flex-direction: column;
 }
 
-div > ul > li {
-  border-bottom: solid 1px teal;
-}
-
 li > * {
   margin-bottom: 0.5rem;
 }
 
-.quantity {
-  color: teal;
-  font-weight: bold;
+.products > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
 }
 
+.product-pic {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
 
+.pop-button {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -38px);
+  border-radius: 0;
+  /* -ms-transform: translate(0, -50%); */
+  /* text-align: center; */
+}
+
+.product-pic-container {
+  position: relative;
+  text-align: center;
+}
+
+.product-pic-container:hover .product-pic {
+  opacity: 0.5;
+}
+
+.product-pic-container:hover .pop-button {
+  opacity: 1;
+}
