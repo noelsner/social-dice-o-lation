@@ -1,35 +1,34 @@
 import React from 'react';
+import { Row, Container } from 'react-bootstrap';
 
 const Products = ({ products, addToCart, lineItems })=> {
-
   return (
     <div>
       <h2>Products</h2>
-      <ul>
-        {
-          products.map( product => {
-
-            const checkedOut = lineItems.find(lineItem => lineItem.productId === product.id);
-            
-            return (
-              <li key={ product.id }>
-                <span>
-                <a href={`#view=product&id=${product.id}`}>{ product.name }</a>
-                </span>
-                <span>
-                ${
-                  Number(product.price).toFixed(2)
-                }
-                </span>
-                <span>
-                Available Quantity: { product.qty }
-                </span>
-                <button onClick={ ()=> addToCart(product.id)}>Add to Cart</button>
-              </li>
-            );
-          })
-        }
-      </ul>
+      <div className='products'>      
+        <ul>
+          {
+            products.map( product => {
+              const checkedOut = lineItems.find(lineItem => lineItem.productId === product.id);
+              return (
+                <li key={ product.id } className='d-flex flex-column justify-content-end bg-light'>
+                  
+                  <span className='product-pic-container'>
+                    <a href={`#view=product&id=${product.id}`}><img src={product.imageURL} className='product-pic w-100 '/></a>
+                    <div className='pop-button btn btn-success w-100' onClick={()=> addToCart(product.id)}>Quick Add to Cart</div>
+                  </span>
+                  <span className='m-0'>
+                    <h3 className='m-0'><a href={`#view=product&id=${product.id}`}>{ product.name }</a></h3>
+                  </span>
+                  <span className='m-0'>
+                    ${Number(product.price).toFixed(2)}
+                  </span>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
     </div>
   );
 };
