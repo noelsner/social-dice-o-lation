@@ -1,15 +1,7 @@
 import React from 'react';
 import { Row, Container } from 'react-bootstrap';
-
+import inCartQuantity from './inCartQuantity';
 const Products = ({ products, addToCart, lineItems })=> {
-
-  const inCartQuantity = (productId) => { 
-    const checkedOut = lineItems.find(lineItem => lineItem.productId === productId);
-    if(checkedOut) {
-      return checkedOut.quantity;
-    }
-    return 0;
-  };
 
   return (
     <div>
@@ -29,7 +21,7 @@ const Products = ({ products, addToCart, lineItems })=> {
                     <h3 className='m-0'><a href={`#view=product&id=${product.id}`}>{ product.name }</a></h3>
                   </span>
                   <span>
-                    <div className='m-0'>Available Quantity: {product.qty - inCartQuantity(product.id)}</div>
+                    <div className='m-0'>Available Quantity: {product.qty - inCartQuantity(product.id, lineItems)}</div>
                   </span>                  
                   <span className='m-0'>
                     ${Number(product.price).toFixed(2)}

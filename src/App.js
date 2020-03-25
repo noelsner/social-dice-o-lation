@@ -115,13 +115,8 @@ const App = () => {
       } else {
         const updated = lineItems.map((_lineItem) => (_lineItem.id === lineItem.id ? lineItem : _lineItem));
         setLineItems(updated);
-        const qtyUpdate = products.map( product => { 
-          if(product.id === productId){
-            product.qty -= lineItem.quantity;
-          }
-          return product;
-        });
-        setProducts(qtyUpdate);
+        
+        //setProducts(qtyUpdate);
 
 
       }
