@@ -3,7 +3,7 @@ import { Row, Container } from 'react-bootstrap';
 import inCartQuantity from './inCartQuantity';
 
 const Products = ({ products, addToCart, lineItems })=> {
-
+  
   return (
     <div>
       <h2>Products</h2>
@@ -11,19 +11,25 @@ const Products = ({ products, addToCart, lineItems })=> {
         <ul>
           {
             products.map( product => {
+
+              const disableButton = Boolean((product.qty - inCartQuantity(product.id, lineItems)) < 1);
+
               return (
                 <li key={ product.id } className='d-flex flex-column justify-content-end bg-light'>
                   
                   <span className='product-pic-container'>
                     <a href={`#view=product&id=${product.id}`}><img src={product.imageURL} className='product-pic w-100 '/></a>
-                    <div className='pop-button btn btn-success w-100' onClick={()=> addToCart(product.id)}>Quick Add to Cart</div>
+                  {/*<div className='pop-button btn btn-success w-100' onClick={()=> addToCart(product.id)}>Quick Add to Cart</div>*/}
                   </span>
                   <span className='m-0'>
                     <h3 className='m-0'><a href={`#view=product&id=${product.id}`}>{ product.name }</a></h3>
                   </span>
                   <span>
                     <div className='m-0'>Available Quantity: {product.qty - inCartQuantity(product.id, lineItems)}</div>
-                  </span>                  
+                  </span>
+                  <span>
+                    <button disabled = {disableButton} onClick={ ()=> addToCart(product.id)} className='btn btn-success w-100 mt-2'>Add to Cart</button>                  
+                  </span>
                   <span className='m-0'>
                     ${Number(product.price).toFixed(2)}
                   </span>
