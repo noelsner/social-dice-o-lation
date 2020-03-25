@@ -10,13 +10,17 @@ const Login = ({ login })=> {
       .catch(ex => setError(ex.response.data.message));
   }
   return (
-    <form onSubmit={ onSubmit }>
-      <h1>Login</h1>
-      <div className='error'>{ error }</div>
-      <input value={ username } onChange={ ev => setUsername(ev.target.value) } />
-      <input value={ password } onChange={ ev => setPassword(ev.target.value) } />
-      <button>Login</button>
-    </form>
+    <div className='login-container'>
+      <form onSubmit={ onSubmit } >
+        <h1>Login</h1>
+        {error && (
+          <div className='alert alert-danger'>{ error }</div>
+        )}
+        <input type='username' className='form-control' placeholder='Username' value={ username } onChange={ ev => setUsername(ev.target.value) } />
+        <input type='password' className='form-control' placeholder='Password' value={ password } onChange={ ev => setPassword(ev.target.value) } />
+        <button className='btn btn-primary w-50'>Login</button>
+      </form>
+    </div>
   );
 };
 
