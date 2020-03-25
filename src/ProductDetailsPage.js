@@ -2,7 +2,9 @@ import React from 'react';
 import inCartQuantity from './inCartQuantity';
 
 const ProductDetailsPage = ({product, addToCart, lineItems}) => {
+  
   const disableButton = Boolean((product.qty - inCartQuantity(product.id, lineItems)) < 1);
+
   return (
     <div className='d-flex flex-row'>
       <div className='w-50 pr-2'>
@@ -19,7 +21,7 @@ const ProductDetailsPage = ({product, addToCart, lineItems}) => {
           <div> {product.description} </div>
         </div>
         <div className='mt-4'>Available Quantity: {product.qty - inCartQuantity(product.id, lineItems)}</div>
-        <button disable = {true} onClick={ ()=> addToCart(product.id)} className='btn btn-success w-100 mt-2'>Add to Cart</button>
+        <button disabled = {disableButton} onClick={ ()=> addToCart(product.id)} className='btn btn-success w-100 mt-2'>Add to Cart</button>
       </div>
     </div>
   );
