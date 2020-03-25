@@ -2,6 +2,15 @@ import React from 'react';
 import { Row, Container } from 'react-bootstrap';
 
 const Products = ({ products, addToCart, lineItems })=> {
+
+  const inCartQuantity = (productId) => { 
+    const checkedOut = lineItems.find(lineItem => lineItem.productId === productId);
+    if(checkedOut) {
+      return checkedOut.quantity;
+    }
+    return 0;
+  };
+
   return (
     <div>
       <h2>Products</h2>
@@ -9,7 +18,6 @@ const Products = ({ products, addToCart, lineItems })=> {
         <ul>
           {
             products.map( product => {
-              const checkedOut = lineItems.find(lineItem => lineItem.productId === product.id);
               return (
                 <li key={ product.id } className='d-flex flex-column justify-content-end bg-light'>
                   
@@ -20,6 +28,9 @@ const Products = ({ products, addToCart, lineItems })=> {
                   <span className='m-0'>
                     <h3 className='m-0'><a href={`#view=product&id=${product.id}`}>{ product.name }</a></h3>
                   </span>
+                  <span>
+                    <div className='m-0'>Available Quantity: {product.qty - inCartQuantity(product.id)}</div>
+                  </span>                  
                   <span className='m-0'>
                     ${Number(product.price).toFixed(2)}
                   </span>
