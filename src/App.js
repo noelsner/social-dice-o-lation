@@ -166,7 +166,7 @@ const App = () => {
           {
             view === 'product' && (
               <div>
-                <ProductDetailsPage product={products.find(product => product.id === params.id)} addToCart={addToCart} />
+                <ProductDetailsPage product={products.find(product => product.id === params.id)} addToCart={addToCart} lineItems = {lineItems} />
               </div>
             )
           }

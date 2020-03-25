@@ -1,6 +1,7 @@
 import React from 'react';
+import inCartQuantity from './inCartQuantity';
 
-const ProductDetailsPage = ({product, addToCart}) => {
+const ProductDetailsPage = ({product, addToCart, lineItems}) => {
   console.log(product)
   return (
     <div className='d-flex flex-row'>
@@ -17,7 +18,7 @@ const ProductDetailsPage = ({product, addToCart}) => {
           <u>Description:</u>
           <div> {product.description} </div>
         </div>
-        <div className='mt-4'>Available Quantity: {product.qty}</div>
+        <div className='mt-4'>Available Quantity: {product.qty - inCartQuantity(product.id, lineItems)}</div>
         <button onClick={ ()=> addToCart(product.id)} className='btn btn-success w-100 mt-2'>Add to Cart</button>
       </div>
     </div>
