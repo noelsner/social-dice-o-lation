@@ -95,3 +95,7 @@ li > * {
 .product-pic-container:hover .pop-button {
   opacity: 1;
 }
+
+.cart-product-img {
+  width: 72px;
+}
