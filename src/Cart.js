@@ -1,7 +1,7 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import AdjustQuantity from './cart/AdjustQuantity';
 const Cart = ({ lineItems, cart, createOrder, removeFromCart, products })=> {
 
   const status = (product) => {
@@ -52,7 +52,7 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products })=> {
                           </div>
                         </div>
                       </td>
-                      <td className='col-sm-1 col-md-1 text-center'>{lineItem.quantity}</td>
+                      <td className='col-sm-1 col-md-1 text-center'>{lineItem.quantity} <AdjustQuantity lineItemQuantity ={lineItem.quantity}/></td>
                       <td className='col-sm-1 col-md-1 text-center'>${Number(product.price).toFixed(2)}</td>
                       <td className='col-sm-1 col-md-1 text-center'>${Number((product.price)*(lineItem.quantity)).toFixed(2)}</td>
                       <td className='d-flex justify-content-center'>

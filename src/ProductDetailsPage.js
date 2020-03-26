@@ -1,5 +1,5 @@
 import React from 'react';
-import inCartQuantity from './inCartQuantity';
+import inCartQuantity from './cart/inCartQuantity';
 
 const ProductDetailsPage = ({product, addToCart, lineItems}) => {
   
