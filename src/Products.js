@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Container } from 'react-bootstrap';
-import inCartQuantity from './inCartQuantity';
+import inCartQuantity from './cart/inCartQuantity';
 
 const Products = ({ products, addToCart, lineItems })=> {
   
