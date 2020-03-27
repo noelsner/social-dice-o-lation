@@ -48,11 +48,23 @@ const getLineItems = async(userId)=> {
   return ( await client.query(SQL, [ userId ])).rows;
 };
 
+const updateLineItem = async({lineItemId, newQuantity}) => {
+  const SQL = 'UPDATE "lineItems" SET quantity = $1 WHERE id = $2 returning *';
+  return ( await client.query(SQL,[newQuantity, lineItemId])).rows[0];
+
+  // requested quantity
+  // quantity in inventory
+  // compare, if not enough, send back error response
+  // if successful, put
+
+};
+
 module.exports = {
   getCart,
   getOrders,
   addToCart,
   removeFromCart,
   createOrder,
-  getLineItems
+  getLineItems,
+  updateLineItem
 }

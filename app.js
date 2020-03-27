@@ -83,6 +83,12 @@ app.get('/api/getLineItems', (req, res, next)=> {
     .catch( next );
 });
 
+app.put('/api/getLineItems', (req, res, next)=> {
+  db.updateLineItem(req.body)
+    .then( lineItem => res.send(lineItem))
+    .catch(next)
+});
+
 app.post('/api/addToCart', (req, res, next)=> {
   db.addToCart({ userId: req.user.id, productId: req.body.productId })
     .then( lineItem => res.send(lineItem))
