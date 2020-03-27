@@ -10,7 +10,8 @@ const {
   addToCart,
   removeFromCart,
   createOrder,
-  getLineItems
+  getLineItems,
+  updateLineItem
 } = require('./userMethods');
 
 const sync = async()=> {
@@ -132,5 +133,6 @@ module.exports = {
   addToCart,
   removeFromCart,
   createOrder,
-  getLineItems
+  getLineItems,
+  updateLineItem
 };

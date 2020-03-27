@@ -1,19 +1,19 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-
-const Cart = ({ lineItems, cart, createOrder, removeFromCart, products })=> {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import AdjustQuantity from './cart/AdjustQuantity';
+const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLineItems })=> {
 
   const status = (product) => {
-    if(!product.qty){
+    if(!product.quantity){
       return (
         <span className='text-danger'>Out of Stock</span>
       )
-    } else if(product.qty <= 3){
+    } else if(product.quantity <= 3){
       return (
-        <span className='text-warning'>Low Inventory. {product.qty} Items Left</span>
+        <span className='text-warning'>Low Inventory. {product.quantity} Items Left</span>
       )
-    } else if(product.qty > 3){
+    } else if(product.quantity > 3){
       return (
         <span className='text-success'>In Stock</span>
       )
@@ -52,7 +52,7 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products })=> {
                           </div>
                         </div>
                       </td>
-                      <td className='col-sm-1 col-md-1 text-center'>{lineItem.quantity}</td>
+                      <td className='col-sm-1 col-md-1 text-center'> <AdjustQuantity lineItemQuantity = {lineItem.quantity} lineItemId = {lineItem.id} updateLineItems = {updateLineItems}/></td>
                       <td className='col-sm-1 col-md-1 text-center'>${Number(product.price).toFixed(2)}</td>
                       <td className='col-sm-1 col-md-1 text-center'>${Number((product.price)*(lineItem.quantity)).toFixed(2)}</td>
                       <td className='d-flex justify-content-center'>
