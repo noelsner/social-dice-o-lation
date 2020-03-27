@@ -5,15 +5,15 @@ import AdjustQuantity from './cart/AdjustQuantity';
 const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLineItems })=> {
 
   const status = (product) => {
-    if(!product.qty){
+    if(!product.quantity){
       return (
         <span className='text-danger'>Out of Stock</span>
       )
-    } else if(product.qty <= 3){
+    } else if(product.quantity <= 3){
       return (
-        <span className='text-warning'>Low Inventory. {product.qty} Items Left</span>
+        <span className='text-warning'>Low Inventory. {product.quantity} Items Left</span>
       )
-    } else if(product.qty > 3){
+    } else if(product.quantity > 3){
       return (
         <span className='text-success'>In Stock</span>
       )

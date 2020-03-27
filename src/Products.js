@@ -12,7 +12,7 @@ const Products = ({ products, addToCart, lineItems })=> {
           {
             products.map( product => {
 
-              const disableButton = Boolean((product.qty - inCartQuantity(product.id, lineItems)) < 1);
+              const disableButton = Boolean((product.quantity - inCartQuantity(product.id, lineItems)) < 1);
 
               return (
                 <li key={ product.id } className='d-flex flex-column justify-content-end bg-light'>
@@ -25,7 +25,7 @@ const Products = ({ products, addToCart, lineItems })=> {
                     <h3 className='m-0'><a href={`#view=product&id=${product.id}`}>{ product.name }</a></h3>
                   </span>
                   <span>
-                    <div className='m-0'>Available Quantity: {product.qty - inCartQuantity(product.id, lineItems)}</div>
+                    <div className='m-0'>Available Quantity: {product.quantity - inCartQuantity(product.id, lineItems)}</div>
                   </span>
                   <span>
                     <button disabled = {disableButton} onClick={ ()=> addToCart(product.id)} className='btn btn-success w-100 mt-2'>Add to Cart</button>                  
