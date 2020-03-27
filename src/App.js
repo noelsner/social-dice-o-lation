@@ -117,6 +117,16 @@ const App = () => {
     });
   };
 
+  const updateLineItems = (updateItem) => {
+    const updatedItems = lineItems.map( lineItem => {
+      if(lineItem.id === updateItem.id){
+        return updateItem;
+      }
+      return lineItem;
+    });
+    setLineItems(updatedItems);
+  };
+
   const removeFromCart = (lineItemId) => {
     axios.delete(`/api/removeFromCart/${lineItemId}`, headers()).then(() => {
       setLineItems(lineItems.filter((_lineItem) => _lineItem.id !== lineItemId));
@@ -144,7 +154,7 @@ const App = () => {
             view === 'cart' && (
               <div>
                 <h1> CART PAGE </h1>
-                <Cart lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} />
+                <Cart lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
               </div>
             )
           }
