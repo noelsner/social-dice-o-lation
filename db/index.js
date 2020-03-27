@@ -33,7 +33,7 @@ const sync = async()=> {
       name VARCHAR(100) NOT NULL UNIQUE,
       price DECIMAL NOT NULL,
       CHECK (char_length(name) > 0),
-      qty INT NOT NULL DEFAULT 5,
+      quantity INT NOT NULL DEFAULT 5,
       "imageURL" VARCHAR(300) DEFAULT 'https://image.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-260nw-1037719192.jpg',
       description VARCHAR(300) DEFAULT 'No description available.'
     );
