@@ -53,14 +53,11 @@ const updateLineItem = async({lineItemId, newQuantity}) => {
   console.log(productId.productId);
   const currentInventory = (await client.query('SELECT qty FROM products WHERE id = $1', [productId.productId])).rows[0];
   console.log(currentInventory);
+  if(currentInventory.qty < newQuantity){
+    throw Error(`Only ${currentInventory.qty} units available`);
+  };
   const SQL = 'UPDATE "lineItems" SET quantity = $1 WHERE id = $2 returning *';
   return ( await client.query(SQL,[newQuantity, lineItemId])).rows[0];
-
-  // requested quantity
-  // quantity in inventory
-  // compare, if not enough, send back error response
-  // if successful, put
-
 };
 
 module.exports = {

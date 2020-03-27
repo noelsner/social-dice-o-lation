@@ -24,6 +24,9 @@ const AdjustQuantity = ({lineItemQuantity, lineItemId, updateLineItems}) => {
             setQuantity(response.data.quantity);
             setStatus('Quantity Updated');
             updateLineItems(response.data);
+        })
+        .catch( ex => { 
+            setStatus(ex.response.data.message); 
         });
     };
 
@@ -36,6 +39,9 @@ const AdjustQuantity = ({lineItemQuantity, lineItemId, updateLineItems}) => {
                 <option value = '4'>4</option>
                 <option value = '5'>5</option>
                 <option value = '6'>6</option>
+                <option value = '7'>7</option>
+                <option value = '8'>8</option>
+                <option value = '9'>9</option>
             </select>
             <span>{status}</span>
         </div>
