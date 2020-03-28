@@ -101,6 +101,9 @@ const App = () => {
       })
       .then((response) => {
         setCart(response.data);
+      })
+      .then(response => {
+        setLineItems([])
       });
   };
 
@@ -140,7 +143,7 @@ const App = () => {
   } else {
     return (
       <div>
-        <MyNavbar lineItems={ lineItems } logout={logout} auth={auth} />
+        <MyNavbar lineItems={ lineItems } logout={logout} auth={auth} cart={cart} />
         <div className='horizontal'>
           {
             !view && (
@@ -153,7 +156,6 @@ const App = () => {
           {
             view === 'cart' && (
               <div>
-                <h1> CART PAGE </h1>
                 <Cart lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
               </div>
             )

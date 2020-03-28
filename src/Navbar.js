@@ -3,7 +3,12 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-const MyNavbar = ({ lineItems, logout, auth }) => {
+const MyNavbar = ({ lineItems, logout, auth, cart }) => {
+  const currentLineItems = lineItems.filter(lineItem => lineItem.orderId === cart.id);
+  const cartSize = currentLineItems.reduce((sum, lineItem) => {
+    return sum + lineItem.quantity
+  }, 0);
+
   return (
     <Navbar bg='primary'  variant='dark' expand='sm' className='flex justify-content-between'>
       <Navbar.Brand href='#'>Team-4-Store</Navbar.Brand>
@@ -18,7 +23,7 @@ const MyNavbar = ({ lineItems, logout, auth }) => {
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={logout} className='dropdown-item'>Logout {auth.username}</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href='#view=cart'><FontAwesomeIcon icon={faShoppingCart} />({lineItems.length})</Nav.Link>
+            <Nav.Link href='#view=cart'><FontAwesomeIcon icon={faShoppingCart} />({cartSize})</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </div>
