@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 
 const Orders = ({ lineItems, orders, products })=> {
@@ -20,7 +21,7 @@ const Orders = ({ lineItems, orders, products })=> {
                           OrderID: { order.id.slice(0, 4) }
                         </h5>
                         <h5>
-                          Order Date: 03/27/2020 
+                          Order Date: {moment(order.createdAt).format('L')} 
                         </h5>
                         <h5>
                           Order Total: $xx.xx
