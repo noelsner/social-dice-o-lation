@@ -42,6 +42,11 @@ const insertOrderLines = (cartProducts, orderId) => {
   }); 
 }
 
+const getCompletedOrders = async(orderId) => {
+  const SQL = 'SELECT * FROM "completedOrders" WHERE "orderId" = $1';
+  return (await client.query(SQL, orderId)).rows;
+}
+
 const createOrder = async(userId)=> {
   const cart = await getCart(userId);
   cart.status = 'ORDER';
@@ -110,5 +115,6 @@ module.exports = {
   removeFromCart,
   createOrder,
   getLineItems,
-  updateLineItem
+  updateLineItem,
+  getCompletedOrders
 }
