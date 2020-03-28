@@ -62,45 +62,28 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
                   );
                 })
               }
-              <tr>
-                  <td>   </td>
-                  <td>   </td>
-                  <td>   </td>
-                  <td>Subtotal</td>
-                  <td className="text-right"><h5><strong>$xx.xx</strong></h5></td>
-              </tr>
-              <tr>
-                  <td>   </td>
-                  <td>   </td>
-                  <td>   </td>
-                  <td>Shipping</td>
-                  <td className="text-right"><h5><strong>$0.00</strong></h5></td>
-              </tr>
-              <tr>
-                  <td>   </td>
-                  <td>   </td>
-                  <td>   </td>
-                  <td><h5>Total</h5></td>
-                  <td className="text-right"><h5><strong>$xx.xx</strong></h5></td>
-              </tr>
-              <tr>
-                  <td>   </td>
-                  <td>   </td>
-                  <td>   </td>
-                  <td>
-                    <button type="button" className="btn btn-outline-secondary" href='view=products'>Continue Shopping</button>
-                  </td>
-                  <td>
-                    <button type="button" className="btn btn-success" disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )} onClick={ createOrder }>Checkout</button>
-                  </td>
-              </tr>
             </tbody>
           </table>
+          <div className='mx-auto mt-4 w-50'>
+            <div className='d-flex justify-content-center'>
+              <div className='d-flex flex-column align-items-end'>
+                <h6 className='mr-4 '>Subtotal</h6>
+                <h6 className='mr-4 '>Shipping</h6>
+                <h4 className='mr-4 '>Total</h4>
+              </div>
+              <div className='d-flex flex-column align-items-end'>
+                <h6>$123.45</h6>
+                <h6>$0.00</h6>
+                <h4 className='font-weight-bolder'>$123.45</h4>
+              </div>
+            </div>
+            <div className='d-flex flex-column mt-4'>
+              <button id='checkout-btn' type='button' className='btn btn-success' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )} onClick={ createOrder }>Checkout</button>              
+              <a className='text-secondary text-center mt-2' href='#view=products'>Continue Shopping</a>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* <h2>Cart - { cart.id && cart.id.slice(0, 4) }</h2> */}
-      
     </div>
   );
 };
