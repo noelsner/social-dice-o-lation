@@ -5,7 +5,7 @@ const Checkout = ({ auth, lineItems, cart, createOrder, removeFromCart, products
   return (
     <div className='d-flex align-items-top'>
       <div className='d-flex flex-column align-items-center w-75'>
-        <div className='bg-light m-4 p-4 w-100'>
+        <div className='bg-light m-4 px-4 pt-4 w-100'>
           <h4>Shipping Details</h4>
           <Shipping auth={auth}/>
         </div>
