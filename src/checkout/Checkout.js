@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import Shipping from './Shipping';
+import Payment from './Payment';
+import OrderSummary from './OrderSummary';
 
 const Checkout = ({ auth, lineItems, cart, createOrder, removeFromCart, products, updateLineItems }) => {
   return (
@@ -11,9 +13,11 @@ const Checkout = ({ auth, lineItems, cart, createOrder, removeFromCart, products
         </div>
         <div className='bg-light m-4 p-4 w-100'>
           <h4>Payment Method</h4>
+          <Payment auth={auth}/>
         </div>
         <div className='bg-light m-4 p-4 w-100'>
           <h4>Order Summary</h4>
+          <OrderSummary lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
         </div>
       </div>
       <div className='d-flex justify-content-center'>
