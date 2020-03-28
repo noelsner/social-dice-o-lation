@@ -20,8 +20,8 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
     };
   };
 
-  // console.log(cart)
-  // console.log(lineItems)
+  console.log('cart :', cart);
+  console.log('lineItems :', lineItems);
 
   return (
     <div className='container'>
