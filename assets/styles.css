@@ -99,3 +99,11 @@ li > * {
 .cart-product-img {
   width: 72px;
 }
+
+.order-product {
+  margin-left: 4rem;
+}
+
+#checkout-btn {
+  border-radius: 40px;
+}
