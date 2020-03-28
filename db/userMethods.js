@@ -15,6 +15,21 @@ const getOrders = async(userId)=> {
 const createOrder = async(userId)=> {
   const cart = await getCart(userId);
   cart.status = 'ORDER';
+  const cartProducts = (await client.query('SELECT "productId", quantity FROM "lineItems" WHERE "orderId" = $1', [cart.id])).rows;
+  
+  cartProducts.forEach( async({productId, quantity}) => {
+    console.log(productId);
+    const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
+    console.log(currentInventory);
+    if(quantity > 4) {
+      throw Error(`Not enough units to order`);
+    };
+
+  });
+  
+  //check if any quantities exceed current product quantity
+  //if everything is good
+  // deduct order quantites from product quantities
   return (await client.query(`UPDATE orders SET status=$1 WHERE id=$2 returning *`, [ 'ORDER', cart.id ])).rows[0];
 };
 
