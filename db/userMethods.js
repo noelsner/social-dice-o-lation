@@ -12,24 +12,52 @@ const getOrders = async(userId)=> {
   return (await client.query(`SELECT * FROM orders WHERE status <> 'CART' and "userId"=$1`, [userId])).rows; 
 };
 
+const checkInventory =  (cartProducts) => {
+  return cartProducts.map( async({productId, quantity}) => {      
+    return new Promise( async(resolve, reject) => {
+      const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
+      console.log(`Found ${currentInventory} units of ${productId}`);
+      //if(quantity > currentIventory) {
+      if(quantity > 4) { // temporarily pretending we only have 4 units available
+        reject(new Error( `Not enough units of ${productId}`));
+      };
+      resolve();
+    });
+
+      
+  });
+};
+
+const insertOrderLines = (cartProducts, orderId) => {
+  const SQL = `
+    INSERT INTO "completedOrders"( 
+      "orderId", 
+      "productId", 
+      "orderPrice", 
+      quantity)
+    VALUES($1,$2,$3,$4)
+  `;
+  return cartProducts.map(({productId, quantity, price})=>{
+    return client.query(SQL,[orderId, productId, price, quantity]);
+  }); 
+}
+
 const createOrder = async(userId)=> {
   const cart = await getCart(userId);
   cart.status = 'ORDER';
-  const cartProducts = (await client.query('SELECT "productId", quantity FROM "lineItems" WHERE "orderId" = $1', [cart.id])).rows;
+  const cartProducts = (await client.query('SELECT "productId", "lineItems".quantity, price FROM "lineItems" JOIN products ON "lineItems"."productId" = products.id WHERE "orderId" = $1',[cart.id])).rows;
   
-  cartProducts.forEach( async({productId, quantity}) => {
-    console.log(productId);
-    const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
-    console.log(currentInventory);
-    if(quantity > 4) {
-      throw Error(`Not enough units to order`);
-    };
+  await Promise.all(checkInventory(cartProducts))
+  .then(()=> console.log('**** Inventory check complete, there is sufficent stock ****'))
+  .catch((ex)=> console.log(ex));
 
-  });
-  
-  //check if any quantities exceed current product quantity
-  //if everything is good
+  console.log('Deduce Order Quantities from product Inventory');
   // deduct order quantites from product quantities
+
+  await Promise.all(insertOrderLines(cartProducts, cart.id))
+  .then(()=> console.log('**** Order Items logged ****'))
+  .catch((ex)=> console.log(ex));
+  
   return (await client.query(`UPDATE orders SET status=$1 WHERE id=$2 returning *`, [ 'ORDER', cart.id ])).rows[0];
 };
 
