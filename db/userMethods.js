@@ -53,7 +53,7 @@ const createOrder = async(userId)=> {
 
   console.log('Deduce Order Quantities from product Inventory');
   // deduct order quantites from product quantities
-
+ 
   await Promise.all(insertOrderLines(cartProducts, cart.id))
   .then(()=> console.log('**** Order Items logged ****'))
   .catch((ex)=> console.log(ex));
