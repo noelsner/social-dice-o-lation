@@ -3,7 +3,6 @@ import moment from 'moment';
 
 
 const Orders = ({ lineItems, orders, products })=> {
-  console.log(orders)
   
   return (
     <div className='container'>

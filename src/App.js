@@ -7,6 +7,7 @@ import Cart from './Cart';
 import Products from './Products';
 import ProductDetailsPage from './ProductDetailsPage';
 import MyNavbar from './Navbar';
+import Checkout from './checkout/Checkout';
 
 const headers = () => {
   const token = window.localStorage.getItem('token');
@@ -173,6 +174,14 @@ const App = () => {
             view === 'product' && (
               <div>
                 <ProductDetailsPage product={products.find(product => product.id === params.id)} addToCart={addToCart} lineItems = {lineItems} />
+              </div>
+            )
+          }
+
+          {
+            view === 'checkout' && (
+              <div>
+                <Checkout auth={auth} lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
               </div>
             )
           }

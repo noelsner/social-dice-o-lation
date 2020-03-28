@@ -4,6 +4,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import AdjustQuantity from './cart/AdjustQuantity';
 const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLineItems })=> {
 
+  let subTotal = 0;
+  let shipping = 0;
+
   const status = (product) => {
     if(!product.quantity){
       return (
@@ -19,9 +22,6 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
       )
     };
   };
-
-  console.log('cart :', cart);
-  console.log('lineItems :', lineItems);
 
   return (
     <div className='container'>
@@ -41,6 +41,7 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
               {
                 lineItems.filter( lineItem => lineItem.orderId === cart.id ).map( lineItem => {
                   const product = products.find( product => product.id === lineItem.productId)
+                  subTotal += ((product.price)*(lineItem.quantity));
                   return (
                     <tr key={ lineItem.id }>
                       <td className='col-sm-8 col-md-6'>
@@ -75,13 +76,13 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
                 <h4 className='mr-4 '>Total</h4>
               </div>
               <div className='d-flex flex-column align-items-end'>
-                <h6>$123.45</h6>
-                <h6>$0.00</h6>
-                <h4 className='font-weight-bolder'>$123.45</h4>
+                <h6>${Number(subTotal).toFixed(2)}</h6>
+                <h6>${Number(shipping).toFixed(2)}</h6>
+                <h4 className='font-weight-bolder'>${Number(subTotal + shipping).toFixed(2)}</h4>
               </div>
             </div>
             <div className='d-flex flex-column mt-4'>
-              <button id='checkout-btn' type='button' className='btn btn-success' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )} onClick={ createOrder }>Checkout</button>              
+              <a href='#view=checkout' className='d-flex justify-content-center'><button id='checkout-btn' type='button' className='btn btn-primary w-100' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )}>Checkout</button></a>              
               <a className='text-secondary text-center mt-2' href='#view=products'>Continue Shopping</a>
             </div>
           </div>
