@@ -20,6 +20,9 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
     };
   };
 
+  // console.log(cart)
+  // console.log(lineItems)
+
   return (
     <div className='container'>
       <div className='row'>
@@ -29,9 +32,9 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
               <tr>
                 <th>Product</th>
                 <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-                <th>Remove</th>
+                <th className='text-center'>Price</th>
+                <th className='text-center'>Total</th>
+                <th className='text-center'>Remove</th>
               </tr>
             </thead>
             <tbody>
