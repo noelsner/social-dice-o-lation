@@ -18,6 +18,7 @@ const sync = async()=> {
   const SQL = `
     CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
     DROP TABLE IF EXISTS "lineItems";
+    DROP TABLE IF EXISTS "completedOrders";
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS products;
@@ -50,6 +51,15 @@ const sync = async()=> {
       "productId" UUID REFERENCES products(id) NOT NULL,
       quantity INTEGER DEFAULT 1
     );
+    CREATE TABLE "completedOrders" (
+      "completedOrderId" UUID PRIMARY KEY DEFAULT uuid_generate_v4() , 
+      "orderId" UUID REFERENCES orders(id) NOT NULL,
+      "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      "productId" UUID REFERENCES products(id) NOT NULL,
+      "orderPrice" DECIMAL NOT NULL,
+      quantity INTEGER DEFAULT 1
+    );
+
   `;
   await client.query(SQL);
 
