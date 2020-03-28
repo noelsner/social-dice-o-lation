@@ -23,9 +23,6 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
     };
   };
 
-  console.log('cart :', cart);
-  console.log('lineItems :', lineItems);
-
   return (
     <div className='container'>
       <div className='row'>
@@ -85,7 +82,7 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
               </div>
             </div>
             <div className='d-flex flex-column mt-4'>
-              <button id='checkout-btn' type='button' className='btn btn-success' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )} onClick={ createOrder }>Checkout</button>              
+              <a href='#view=checkout' className='d-flex justify-content-center'><button id='checkout-btn' type='button' className='btn btn-primary w-100' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )}>Checkout</button></a>              
               <a className='text-secondary text-center mt-2' href='#view=products'>Continue Shopping</a>
             </div>
           </div>

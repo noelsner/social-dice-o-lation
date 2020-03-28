@@ -15,7 +15,7 @@ input,button {
 
 }
 
-form {
+.login-form {
   border-radius: 8px;
   text-align: center;
   display: flex;
@@ -27,7 +27,7 @@ form {
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
 }
 
-form > * {
+.login-form > * {
   margin: 1rem;
 }
 

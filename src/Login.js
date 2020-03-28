@@ -11,7 +11,7 @@ const Login = ({ login })=> {
   }
   return (
     <div className='login-container'>
-      <form onSubmit={ onSubmit } >
+      <form className='login-form' onSubmit={ onSubmit } >
         <h1>Login</h1>
         {error && (
           <div className='alert alert-danger'>{ error }</div>
