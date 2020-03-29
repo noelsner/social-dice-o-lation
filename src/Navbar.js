@@ -17,11 +17,11 @@ const MyNavbar = ({ lineItems, logout, auth, cart }) => {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
             <Nav.Link href='#view'>Products</Nav.Link>
-            <NavDropdown title='My Account' id='basic-nav-dropdown'>
+            <NavDropdown alignRight title='My Account' id='basic-nav-dropdown-align-right'>
               <NavDropdown.Item href='#view=account'>Details</NavDropdown.Item>
               <NavDropdown.Item href='#view=orders'>Order History</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={logout} className='dropdown-item'>Logout {auth.username}</NavDropdown.Item>
+              <NavDropdown.Item onClick={logout} className='dropdown-item'>Logout {`${auth.firstName} ${auth.lastName}`}</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href='#view=cart'><FontAwesomeIcon icon={faShoppingCart} />({cartSize})</Nav.Link>
           </Nav>

@@ -35,7 +35,6 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <div>Order No. {cart.id}</div>
             </div>
             <div className="modal-body">
               ...

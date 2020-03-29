@@ -137,4 +137,11 @@ app.use((err, req, res, next)=> {
   res.status(err.status || 500).send({ message: err.message });
 });
 
+app.post('/api/users', (req, res, next) => {
+  console.log(req.body)
+  db.models.users.create(req.body)
+    .then(user => res.send(user))
+    .catch(next);
+});
+
 module.exports = app;

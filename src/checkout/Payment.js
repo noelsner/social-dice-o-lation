@@ -5,7 +5,6 @@ const Payment = ({auth}) => {
   return (
     <div className='mt-4'>
       <form className='w-100'>
-        
         <div>
           <div className="form-group">
             <label htmlFor="cardholderName">Name on Card</label>
