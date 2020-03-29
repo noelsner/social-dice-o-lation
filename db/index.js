@@ -54,12 +54,24 @@ const sync = async()=> {
     );
     CREATE TABLE "completedOrders" (
       "completedOrderId" UUID PRIMARY KEY DEFAULT uuid_generate_v4() , 
-      "orderId" UUID REFERENCES orders(id) NOT NULL,
+      "orderId" UUID NOT NULL,
       "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      "productId" UUID REFERENCES products(id) NOT NULL,
+      "productId" UUID NOT NULL,
       "orderPrice" DECIMAL NOT NULL,
       quantity INTEGER DEFAULT 1
     );
+    
+    INSERT INTO "completedOrders"( 
+      "orderId", 
+      "productId", 
+      "orderPrice", 
+      quantity)
+    VALUES(
+      '59839a09-ac5b-4619-be96-b2ab58d8b0c0',
+      'daa63415-c251-488c-bf0a-1f2ff462fc07',
+      '9.99',
+      7
+      );
 
   `;
   await client.query(SQL);

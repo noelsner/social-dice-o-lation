@@ -42,9 +42,9 @@ const insertOrderLines = (cartProducts, orderId) => {
   }); 
 }
 
-const getCompletedOrders = async(orderId) => {
-  const SQL = 'SELECT * FROM "completedOrders" WHERE "orderId" = $1';
-  return (await client.query(SQL, orderId)).rows;
+const getCompletedOrders = async() => {
+  const SQL = 'SELECT * FROM "completedOrders"';
+  return (await client.query(SQL)).rows;
 }
 
 const createOrder = async(userId)=> {

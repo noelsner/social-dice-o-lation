@@ -84,8 +84,8 @@ app.get('/api/getLineItems', (req, res, next)=> {
     .catch( next );
 });
 
-app.get('/api/getCompletedOrders/:id', (req, res, next)=> {
-  db.getCompletedOrders(req.params.id)
+app.get('/api/getCompletedOrders', (req, res, next)=> {
+  db.getCompletedOrders()
     .then( completedOrders => res.send(completedOrders))
     .catch( next );
 });
