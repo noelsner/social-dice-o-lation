@@ -159,8 +159,6 @@ const App = () => {
 
   const { view } = params;
 
-  console.log('auth :', auth);
-
   if (!auth.id) {
     return (
       <div>
