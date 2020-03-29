@@ -22,9 +22,7 @@ const checkInventory =  (cartProducts) => {
         reject(new Error( `Not enough units of ${productId}`));
       };
       resolve();
-    });
-
-      
+    });      
   });
 };
 
@@ -47,6 +45,15 @@ const getCompletedOrders = async() => {
   return (await client.query(SQL)).rows;
 }
 
+const deductInventory = async(cartProducts) => {
+  return cartProducts.map(async({productId, quantity}) => {
+    const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
+    const newInventory = currentInventory - quantity;
+    const SQL = 'UPDATE products SET quantity = $1 WHERE id = $2 returning *';
+    return (await client.query(SQL,[newInventory, productId])).rows[0];
+  });
+};
+
 const createOrder = async(userId)=> {
   const cart = await getCart(userId);
   cart.status = 'ORDER';
@@ -56,9 +63,15 @@ const createOrder = async(userId)=> {
   .then(()=> console.log('**** Inventory check complete, there is sufficent stock ****'))
   .catch((ex)=> console.log(ex));
 
-  console.log('Deduce Order Quantities from product Inventory');
+  console.log('Deduct Order Quantities from product Inventory');
   // deduct order quantites from product quantities
- 
+  await Promise.all(deductInventory(cartProducts))
+  .then((response)=> {
+    console.log('****** Inventory deducted ******');
+    console.log(response);
+    })
+  .catch((ex)=> console.log(ex));
+
   await Promise.all(insertOrderLines(cartProducts, cart.id))
   .then(()=> console.log('**** Order Items logged ****'))
   .catch((ex)=> console.log(ex));
