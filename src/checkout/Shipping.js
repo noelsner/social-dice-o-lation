@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const Shipping = ({auth}) => {
-  const [firstName, setFirstName] = useState(auth.username);
-  const [lastName, setLastName] = useState('Last Name')
+  const [firstName, setFirstName] = useState(auth.firstName);
+  const [lastName, setLastName] = useState(auth.lastName);
   return (
     <div className='mt-4'>
       <form className='w-100'>
@@ -13,7 +13,7 @@ const Shipping = ({auth}) => {
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputLastName">Last Name</label>
-            <input type="text" className="form-control" id="inputLastName" placeholder={lastName} onChange={ev => setLastName(ev)}></input>
+            <input type="text" className="form-control" id="inputLastName" value={lastName} onChange={ev => setLastName(ev)}></input>
           </div>
         </div>
 

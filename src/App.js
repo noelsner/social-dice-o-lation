@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import qs from 'qs';
 import axios from 'axios';
-import Login from './Login';
+import Login from './login/Login';
+import CreateUser from './login/CreateUser';
 import Orders from './Orders';
 import Cart from './Cart';
 import Products from './Products';
@@ -108,6 +109,13 @@ const App = () => {
       });
   };
 
+  const createUser = async ({firstName, lastName, username, password}) => {
+    const token = (await axios.post('/api/auth', {username, password})).data.token;
+    window.localStorage.setItem('token', token);
+    exchangeTokenForAuth();
+    await axios.post('/api/users', {firstName, lastName, username, password});
+  };
+
   const addToCart = (productId) => {
     axios.post('/api/addToCart', { productId }, headers()).then((response) => {
       const lineItem = response.data;
@@ -139,8 +147,23 @@ const App = () => {
 
   const { view } = params;
 
+  console.log('auth :', auth);
+
   if (!auth.id) {
-    return <Login login={login} />;
+    return (
+      <div>
+        {
+          !view && (
+            <Login login={login} />
+          )
+        }
+        {
+          view === 'createUser' && (
+            <CreateUser createUser={createUser} />
+          )
+        }
+      </div>
+    )
   } else {
     return (
       <div>
@@ -157,7 +180,7 @@ const App = () => {
           {
             view === 'cart' && (
               <div>
-                <Cart lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
+                <Cart lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} orders={orders} />
               </div>
             )
           }
