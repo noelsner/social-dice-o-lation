@@ -157,7 +157,7 @@ const App = () => {
           {
             view === 'cart' && (
               <div>
-                <Cart lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
+                <Cart lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} orders={orders} />
               </div>
             )
           }
