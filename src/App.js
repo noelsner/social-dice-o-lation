@@ -91,6 +91,17 @@ const App = () => {
       setParams(qs.parse(window.location.hash.slice(1)));
     });
   }, []);
+  //************* Test for Completed Orders Route  **********/
+  useEffect(() => {
+    if (auth.id) {
+    axios.get('/api/getCompletedOrders', headers())
+      .then(response => console.log(response.data))
+      .catch(ex => console.log(ex))
+    }
+  }, [auth]);
+
+  //*****************************************************/
+  
 
   const createOrder = () => {
     const token = window.localStorage.getItem('token');

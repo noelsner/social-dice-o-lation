@@ -42,9 +42,9 @@ const insertOrderLines = (cartProducts, orderId) => {
   }); 
 }
 
-const getCompletedOrders = async(orderId) => {
-  const SQL = 'SELECT * FROM "completedOrders" WHERE "orderId" = $1';
-  return (await client.query(SQL, orderId)).rows;
+const getCompletedOrders = async() => {
+  const SQL = 'SELECT * FROM "completedOrders"';
+  return (await client.query(SQL)).rows;
 }
 
 const createOrder = async(userId)=> {
@@ -58,7 +58,7 @@ const createOrder = async(userId)=> {
 
   console.log('Deduce Order Quantities from product Inventory');
   // deduct order quantites from product quantities
-
+ 
   await Promise.all(insertOrderLines(cartProducts, cart.id))
   .then(()=> console.log('**** Order Items logged ****'))
   .catch((ex)=> console.log(ex));
