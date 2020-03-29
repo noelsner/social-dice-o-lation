@@ -110,10 +110,11 @@ const App = () => {
   };
 
   const createUser = async ({firstName, lastName, username, password}) => {
-    const token = (await axios.post('/api/auth', {username, password})).data.token;
-    window.localStorage.setItem('token', token);
-    exchangeTokenForAuth();
-    await axios.post('/api/users', {firstName, lastName, username, password});
+    // const token = (await axios.post('/api/auth', {username, password})).data.token;
+    // window.localStorage.setItem('token', token);
+    // exchangeTokenForAuth();
+    await axios.post('/api/users', {firstName, lastName, username, password}, headers())
+      .then(response => console.log(response));
   };
 
   const addToCart = (productId) => {
