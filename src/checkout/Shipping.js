@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Shipping = ({auth}) => {
   const [firstName, setFirstName] = useState(auth.firstName);
@@ -75,9 +76,30 @@ const Shipping = ({auth}) => {
   //   }
   // }
 
+  const saveAddress = (ev) => {
+    ev.preventDefault();
+    console.log('***** Saving Address *****');
+    
+    const headers = () => {
+      const token = window.localStorage.getItem('token');
+      return {
+        headers: {
+          authorization: token
+        }
+      };
+    };
+    console.log(address);
+    const newAddress = {...address};
+    newAddress.userId = auth.id;
+    axios.post('/api/addresses', newAddress, headers())
+      .then(res => console.log(res.data))
+      .catch(ex => console.log(ex));
+    
+  };
+
   return (
     <div className='mt-4'>
-      <form className='w-100' id='address'>
+      <form className='w-100' id='address' onSubmit = {(ev) => saveAddress(ev)}>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="inputFirstName">First Name</label>
@@ -124,6 +146,7 @@ const Shipping = ({auth}) => {
 
         <div>
           <button className='btn btn-secondary mb-4' type='button'>Save Address</button>
+          <button onClick = {(ev)=> saveAddress(ev)}> Testing Save Address (Remove)</button>
         </div>
 
       </form>

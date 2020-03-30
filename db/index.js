@@ -2,11 +2,10 @@ const client = require('./client');
 
 const { authenticate, compare, findUserFromToken, hash } = require('./auth');
 
-const models = { products, users, orders, lineItems } = require('./models');
+const models = { products, users, orders, lineItems, addresses, completedOrders } = require('./models');
 
 const {
   getCart,
-  getOrders,
   addToCart,
   removeFromCart,
   createOrder,
@@ -18,6 +17,7 @@ const {
 const sync = async()=> {
   const SQL = `
     CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    DROP TABLE IF EXISTS addresses;
     DROP TABLE IF EXISTS "lineItems";
     DROP TABLE IF EXISTS "completedOrders";
     DROP TABLE IF EXISTS orders;
@@ -42,18 +42,21 @@ const sync = async()=> {
       "imageURL" VARCHAR(300) DEFAULT 'https://image.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-260nw-1037719192.jpg',
       description VARCHAR(1000) DEFAULT 'No description available.'
     );
+
     CREATE TABLE orders(
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
       "userId" UUID REFERENCES users(id) NOT NULL,
       status VARCHAR(10) DEFAULT 'CART',
       "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+
     CREATE TABLE "lineItems"(
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
       "orderId" UUID REFERENCES orders(id) NOT NULL,
       "productId" UUID REFERENCES products(id) NOT NULL,
       quantity INTEGER DEFAULT 1
     );
+
     CREATE TABLE "completedOrders" (
       "completedOrderId" UUID PRIMARY KEY DEFAULT uuid_generate_v4() , 
       "orderId" UUID NOT NULL,
@@ -62,19 +65,17 @@ const sync = async()=> {
       "orderPrice" DECIMAL NOT NULL,
       quantity INTEGER DEFAULT 1
     );
-    
-    INSERT INTO "completedOrders"( 
-      "orderId", 
-      "productId", 
-      "orderPrice", 
-      quantity)
-    VALUES(
-      '59839a09-ac5b-4619-be96-b2ab58d8b0c0',
-      'daa63415-c251-488c-bf0a-1f2ff462fc07',
-      '9.99',
-      7
-      );
 
+    CREATE TABLE addresses (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(), 
+      "userId" UUID REFERENCES users(id) NOT NULL,
+      address1 VARCHAR(200),
+      address2 VARCHAR(200),
+      city VARCHAR(100),
+      state VARCHAR(50),
+      country VARCHAR(50),
+      "zipCode" INTEGER
+    );
   `;
   await client.query(SQL);
 
@@ -154,7 +155,26 @@ const sync = async()=> {
   };
 
   const [lucy, moe] = await Promise.all(Object.values(_users).map( user => users.create(user)));
-  const [foo, bar, bazz] = await Promise.all(Object.values(_products).map( product => products.create(product)));
+  const [codenames, yahtzee, lcr, farkle, catan, carcassonne, gameOfLife, monopoly  ] = await Promise.all(Object.values(_products).map( product => products.create(product)));
+  
+  
+  await addresses.create({ 
+    userId: moe.id,
+    address1: "1683 Walnut Grove Ave",
+    city: "Rosemead",
+    state: "CA",
+    country: "United States",
+    zipCode: "91770"
+  });
+  
+  await addresses.create({ 
+    userId: lucy.id,
+    address1: "1600 Amphitheatre Parkway",
+    city: "Mountain View",
+    state: "CA",
+    country: "United States",
+    zipCode: "94043"
+  });
 
   const _orders = {
     moe: {
@@ -164,6 +184,14 @@ const sync = async()=> {
       userId: lucy.id
     }
   };
+
+  //const moeOrder1 = await orders.create(moe.id);
+  //const moeOrder2 = await orders.create(moe.id);
+  //const lucyOrder1 = await orders.create(lucy.id);
+  //const lucyOrder2 = await orders.create(lucy.id);
+
+
+  //await completedOrders(orderId, productId, orderPrice, quantity);
 
   const userMap = (await users.read()).reduce((acc, user)=> {
     acc[user.username] = user;
@@ -185,7 +213,6 @@ module.exports = {
   authenticate,
   findUserFromToken,
   getCart,
-  getOrders,
   addToCart,
   removeFromCart,
   createOrder,

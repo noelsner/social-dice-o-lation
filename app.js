@@ -70,7 +70,7 @@ app.get('/api/getCart', (req, res, next)=> {
 });
 
 app.get('/api/getOrders', (req, res, next)=> {
-  db.getOrders(req.user.id)
+  db.models.orders.read(req.user.id)
     .then( orders => res.send(orders))
     .catch( next );
 });
@@ -79,6 +79,13 @@ app.post('/api/createOrder', (req, res, next)=> {
   console.log('********** DB.createOrder intiated **********');
   db.createOrder(req.user.id)
     .then( order => res.send(order))
+    .catch( next );
+});
+
+app.post('/api/addresses', (req, res, next)=> {
+  console.log('********** Adding new Address now **********');
+  db.models.addresses.create(req.body)
+    .then( address => res.send(address))
     .catch( next );
 });
 
