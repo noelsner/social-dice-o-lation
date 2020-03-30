@@ -18,7 +18,7 @@ const CreateUser = ({createUser}) => {
 
   return (
     <div className='row justify-content-center align-items-center'>
-      <div className='col-md-4 my-auto'>
+      <div className='col-md-5 my-auto'>
         <form className='new-user-form' onSubmit={onSubmit}>
           <h2>Create New Account</h2>
           <div className='w-100 mt-4'>
@@ -38,7 +38,7 @@ const CreateUser = ({createUser}) => {
               <label htmlFor="password">Password</label>
               <input type="password" className="form-control" id="password" value={password} onChange={ev => setPassword(ev.target.value)}></input>
             </div>
-            <button type='submit' className='btn btn-primary mx-auto' disabled={!firstName || !lastName || !username || !password}>Create Account</button>
+            <a href='#'><button type='submit' className='btn btn-primary mx-auto' disabled={!firstName || !lastName || !username || !password}>Create Account</button></a>
           </div>
         </form>
       </div>

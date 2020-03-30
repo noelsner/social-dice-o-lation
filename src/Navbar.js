@@ -11,7 +11,7 @@ const MyNavbar = ({ lineItems, logout, auth, cart }) => {
 
   return (
     <Navbar bg='primary'  variant='dark' expand='sm' className='flex justify-content-between'>
-      <Navbar.Brand href='#'>Team-4-Store</Navbar.Brand>
+      <Navbar.Brand href='#'>Social Dice-O-Lation</Navbar.Brand>
       <div>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
