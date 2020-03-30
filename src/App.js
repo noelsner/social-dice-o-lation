@@ -120,12 +120,12 @@ const App = () => {
       });
   };
 
-  const createUser = async ({firstName, lastName, username, password}) => {
-    // const token = (await axios.post('/api/auth', {username, password})).data.token;
-    // window.localStorage.setItem('token', token);
-    // exchangeTokenForAuth();
-    await axios.post('/api/users', {firstName, lastName, username, password}, headers())
-      .then(response => console.log(response));
+  const createUser = (user) => {
+    axios.post('/api/users', user)
+      .then(response => {
+        window.localStorage.setItem('token', response.data.token);
+        setAuth(response.data.user);
+      });
   };
 
   const addToCart = (productId) => {
