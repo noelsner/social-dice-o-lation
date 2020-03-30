@@ -17,8 +17,8 @@ const checkInventory =  (cartProducts) => {
     return new Promise( async(resolve, reject) => {
       const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
       console.log(`Found ${currentInventory} units of ${productId}`);
-      //if(quantity > currentIventory) {
-      if(quantity > 4) { // temporarily pretending we only have 4 units available
+      if(quantity > currentIventory) {
+      //if(quantity > 4) { // temporarily pretending we only have 4 units available
         reject(new Error( `Not enough units of ${productId}`));
       };
       resolve();
