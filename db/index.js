@@ -40,7 +40,7 @@ const sync = async()=> {
       CHECK (char_length(name) > 0),
       quantity INT NOT NULL DEFAULT 5,
       "imageURL" VARCHAR(300) DEFAULT 'https://image.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-260nw-1037719192.jpg',
-      description VARCHAR(300) DEFAULT 'No description available.'
+      description VARCHAR(1000) DEFAULT 'No description available.'
     );
     CREATE TABLE orders(
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -103,31 +103,56 @@ const sync = async()=> {
   };
 
   const _products = {
-    foo: {
-      name: 'foo',
-      price: 2,
-      imageURL: 'https://www.sprintcenter.com/assets/img/10.12.18-Foo-Fighters-v2-1280x500-8943f0481c.jpg',
-      description: 'An term used for unimportant variables in programming when the programmer is too lazy to think of an actual name.'
+    codenames: {
+      name: 'Codenames',
+      price: 15.27,
+      imageURL: 'https://images-na.ssl-images-amazon.com/images/I/61opBp2cmLL._SX466_.jpg',
+      description: 'Codenames is a social word game with a simple premise and challenging game play. Two rival spymasters know the secret identities of 25 agents. Their teammates know the agents only by their codenames. The teams compete to see who can make contact with all of their agents first. Spymasters give one-word clues that can point to multiple words on the table. Their teammates try to guess words of their color while avoiding those that belong to the opposing team. And everyone wants to avoid the assassin. The game works very well with 4 players if you prefer to guess without help. Or you can add more players if you prefer lively discussion. There is also a cooperative variant where a single team tries to achieve the highest score they can by playing against the game itself.'
     },
-    bar: {
-      name: 'bar',
-      price: 2,
-      imageURL: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80',
-      description: 'A counter across which alcoholic drinks or refreshments are served.'
+    yahtzee: {
+      name: 'Yahtzee',
+      price: 7.99,
+      imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSZ-uTDlEUC8i15MIf3l_OXozcSOX3DjX1oz5Gg_CDlr9LnObXr',
+      description: "Take turns rolling dice to try to score combos. You get a total of 13 turns and may roll up to three times on a turn. At the end of each turn, you must fill in one empty box in your column on the score card. The player with the highest grand total at the end of all 13 rounds wins. It's up to the player whether they hustle for a full house or risk it all for a Yahtzee roll. Show it off, and let the dice fall where they may. Game includes 5 dice and shaker that doubles as storage for easy clean up and travel. Yahtzee is a trademark of Hasbro."
     },
-    bazz: {
-      name: 'bazz',
-      price: 2.50,
-      imageURL: 'https://i.imgur.com/QhPuoW2.jpg',
-      description: 'An term used for unimportant variables in programming when the programmer is too lazy to think of an actual name.'
+    lcr: {
+      name: 'LCR Left Right Center',
+      price: 6.99,
+      imageURL: 'https://images-na.ssl-images-amazon.com/images/I/51Z6zPuHmfL.jpg',
+      description: "LCR Left Center Right is a fun, fast-paced dice game that you won't be able to put down! Each game includes 3 specialty marked LCR dice, 24 playing chips and instructions. Players roll the dice to determine where they pass their chips. The last player with chips is the winner and wins the center pot."
     },
-    quq: {
-      name: 'quq',
-      price: 11.99,
-      imageURL: 'https://upload.wikimedia.org/wikipedia/en/4/44/Spike_Milligan%27s_Q_Logo.png',
-      description: 'An term used for unimportant variables in programming when the programmer is too lazy to think of an actual name.'
-    }
+    farkle: {
+      name: 'Farkle',
+      price: 7.99,
+      imageURL: 'https://i5.walmartimages.com/asr/9c718ca6-8ff6-4540-9751-32e643d272cb_1.50a8d4f657530b687f1855f3ef2ae182.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff',
+      description: "It's a classic dice game that's perfect for family fun or any game night. Roll the dice and try to collect combinations that will earn you some points. But, if you decide to take a risk and continue rolling, you could lose your points in a Farkle!"
+    },
+    catan: {
+      name: 'Catan The Board Game',
+      price: 44.99,
+      imageURL: "https://target.scene7.com/is/image/Target/GUEST_f7dfce8b-234e-4343-9f30-5d5c0da5230c?wid=488&hei=488&fmt=pjpeg",
+      description: "Players look to collect resources before their opponents do. Use the resources you collect to expand into other new settlements by building roads. Players & opponents should look to trade & barter when it comes to Catan. Be sure to pick the perfect strategy that suits you best to ultimately have your small island town grow into a flourishing city. Roll the dice, trade, build and you may be the first player to reach 10 victory points and thus win the game!"
+    },
+    carcassonne: {
+      name: 'Carcassonne',
+      price: 33.99,
+      imageURL: "https://cdn.shopify.com/s/files/1/0605/1065/products/s4856_a914d10e-fc2f-46ec-a088-6a0a417988e6.jpg?v=1496770202",
+      description: "Carcassonne is a tile-laying game in which players fill in the countryside around the fortified city. Players choose from tiles that depict cities, roads, monasteries, and fields; each new tile placed creates an ever-expanding board on which players can then add their followers. Players score points by having followers on features as they're completed. The player who makes the most strategic placements of tiles and followers will score the most points and win the game."
+    },
+    gameOfLife: {
+      name: 'The Game of Life',
+      price: 19.99,
+      imageURL: 'https://m.media-amazon.com/images/S/aplus-media/sota/527f03fa-1986-4045-b464-e90503b3804b._SR285,285_.JPG',
+      description: "In The Game of Life game players can make their own exciting choices as they move through the twists and turns of life. Move the car token around the gameboard from Start to Retirement, and experience unexpected surprises related to family, career, dream vacations, and other milestones of life. Once everyone reaches the end of the game at retirement, everyone pays their debts and adds up their wealth. The player with the most money at the end of the game wins! The Game of Life is a trademark of Hasbro."
+    },
+    monopoly: {
+      name: 'Monopoly',
+      price: 24.99,
+      imageURL: 'https://www.gamesworld.com.au/wp-content/uploads/2017/08/monopoly-17-1.jpg',
+      description:"It's the fast-dealing property trading game where players buy, sell, dream and scheme their way to riches. This version of the Monopoly game welcomes the Rubber Ducky, Tyrannosaurus Rex, and Penguin into its family of tokens. Choose your token, place it on GO! and roll the dice to own it all! There can be only one winner in the Monopoly game. Will it be you? Monopoly is a trademark of Hasbro."
+    },
   };
+
   const [lucy, moe] = await Promise.all(Object.values(_users).map( user => users.create(user)));
   const [foo, bar, bazz] = await Promise.all(Object.values(_products).map( product => products.create(product)));
 

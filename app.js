@@ -3,6 +3,10 @@ const app = express();
 const path = require('path');
 const db = require('./db');
 const models = db.models;
+const jwt = require('jwt-simple');
+
+require('dotenv').config()
+// console.log(process.env.GOOGLE_API)
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
@@ -114,6 +118,17 @@ app.get('/api/products', (req, res, next)=> {
     .catch( next );
 });
 
+app.post('/api/users', (req, res, next) => {
+  console.log("req.body: ",  req.body)
+  db.models.users.create({...req.body, role: "USER"})
+    .then(user => {
+      const token = jwt.encode({ id: user.id }, process.env.JWT);
+      delete user.password;
+      res.send({user, token})
+    })
+    .catch(next);
+});
+
 Object.keys(models).forEach( key => {
   app.get(`/api/${key}`, isLoggedIn, isAdmin, (req, res, next)=> {
     models[key].read({ user: req.user })
@@ -133,15 +148,9 @@ app.use((req, res, next)=> {
 });
 
 app.use((err, req, res, next)=> {
-  console.log(err.status);
+  console.log(err.status, err.message);
   res.status(err.status || 500).send({ message: err.message });
 });
 
-app.post('/api/users', (req, res, next) => {
-  console.log(req.body)
-  db.models.users.create(req.body)
-    .then(user => res.send(user))
-    .catch(next);
-});
 
 module.exports = app;

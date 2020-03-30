@@ -6,7 +6,6 @@ const Products = ({ products, addToCart, lineItems })=> {
   
   return (
     <div>
-      <h2>Products</h2>
       <div className='products'>      
         <ul>
           {
@@ -22,7 +21,7 @@ const Products = ({ products, addToCart, lineItems })=> {
                   {/*<div className='pop-button btn btn-success w-100' onClick={()=> addToCart(product.id)}>Quick Add to Cart</div>*/}
                   </span>
                   <span className='m-0'>
-                    <h3 className='m-0'><a href={`#view=product&id=${product.id}`}>{ product.name }</a></h3>
+                    <h5 className='m-0'><a href={`#view=product&id=${product.id}`}>{ product.name }</a></h5>
                   </span>
                   <span>
                     <div className='m-0'>Available Quantity: {product.quantity - inCartQuantity(product.id, lineItems)}</div>
