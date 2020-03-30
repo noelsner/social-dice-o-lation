@@ -8,17 +8,14 @@ const getCart = async(userId)=> {
   return (await client.query('INSERT INTO orders ("userId") values ($1) returning *', [ userId])).rows[0];
 };
 
-const getOrders = async(userId)=> {
-  return (await client.query(`SELECT * FROM orders WHERE status <> 'CART' and "userId"=$1`, [userId])).rows; 
-};
 
 const checkInventory =  (cartProducts) => {
   return cartProducts.map( async({productId, quantity}) => {      
     return new Promise( async(resolve, reject) => {
       const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
       console.log(`Found ${currentInventory} units of ${productId}`);
-      //if(quantity > currentIventory) {
-      if(quantity > 4) { // temporarily pretending we only have 4 units available
+      if(quantity > currentInventory) {
+      //if(quantity > 4) { // temporarily pretending we only have 4 units available
         reject(new Error( `Not enough units of ${productId}`));
       };
       resolve();
@@ -46,12 +43,19 @@ const getCompletedOrders = async() => {
 }
 
 const deductInventory = async(cartProducts) => {
-  return cartProducts.map(async({productId, quantity}) => {
-    const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
-    const newInventory = currentInventory - quantity;
-    const SQL = 'UPDATE products SET quantity = $1 WHERE id = $2 returning *';
-    return (await client.query(SQL,[newInventory, productId])).rows[0];
+  console.log('Deduct Order Quantities from product Inventory');
+  const deductions = cartProducts.map(async({productId, quantity}) => { 
+    return new Promise( async(resolve, reject) => {
+      const currentInventory = (await client.query('SELECT quantity FROM products WHERE id = $1', [productId])).rows[0].quantity;
+      const newInventory = currentInventory - quantity;
+      console.log(`initiate deducting ${productId}`);
+      await client.query('UPDATE products SET quantity = $1 WHERE id = $2 returning *' ,[newInventory, productId]);
+      resolve();
+      reject(new Error( `Couldn't deduct ${productId}`));
+    })
   });
+  console.log(deductions);
+  return deductions;
 };
 
 const createOrder = async(userId)=> {
@@ -63,13 +67,11 @@ const createOrder = async(userId)=> {
   .then(()=> console.log('**** Inventory check complete, there is sufficent stock ****'))
   .catch((ex)=> console.log(ex));
 
-  console.log('Deduct Order Quantities from product Inventory');
-  // deduct order quantites from product quantities
   await Promise.all(deductInventory(cartProducts))
-  .then((response)=> {
+  .then(response => {
     console.log('****** Inventory deducted ******');
     console.log(response);
-    })
+  })
   .catch((ex)=> console.log(ex));
 
   await Promise.all(insertOrderLines(cartProducts, cart.id))
@@ -123,7 +125,6 @@ const updateLineItem = async({lineItemId, newQuantity}) => {
 
 module.exports = {
   getCart,
-  getOrders,
   addToCart,
   removeFromCart,
   createOrder,
