@@ -1,17 +1,56 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
 
   let shipping = 0;
   let subTotal = 0;
 
+  const headers = () => {
+    const token = window.localStorage.getItem('token');
+    return {
+      headers: {
+        authorization: token
+      }
+    };
+  };
+
+  const [confirmAddress, setConfirmAddress] = useState('');
+  
+  useEffect( ()=> {
+    console.log('Confirm checkout');
+    console.log(cart);
+    if(cart.addressId){
+      axios.get(`/api/singleAddress/${cart.addressId}`, headers())
+        .then(response => {
+          console.log(response.data);
+          setConfirmAddress(response.data);
+        })
+        .catch(ex => console.log(ex));
+    }
+  },[cart])
+  console.log(cart.addressId);
+
   lineItems.filter( lineItem => lineItem.orderId === cart.id ).map( lineItem => {
     const product = products.find( product => product.id === lineItem.productId)
     subTotal += ((product.price)*(lineItem.quantity));
   });
+  const ConfirmedAddress = ()=> {
+    return(
+      <div>
+        {confirmAddress.address1}
+        {confirmAddress.address2}
+        <br/>
+        {`${confirmAddress.city}, ${confirmAddress.state} ${confirmAddress.zipCode}`}
+      </div>
+    );
 
+  };
   return (
     <div>
+      <h3> Ship to: </h3>
+      {!cart.addressId && <h4>No address specified</h4>}
+      {cart.addressId && <ConfirmedAddress />}
       <div className='mx-auto mt-4'>
         <div className='d-flex justify-content-center'>
           <div className='d-flex flex-column align-items-end'>

@@ -89,8 +89,12 @@ app.get('/api/addresses', (req, res, next)=> {
 });
 
 app.get('/api/userAddress/:id', (req, res, next)=> {
-  console.log(req.params.id);
   db.models.addresses.readOneUser(req.params.id)
+    .then( address => res.send(address))
+    .catch( next );
+});
+app.get('/api/singleAddress/:id', (req, res, next)=> {
+  db.models.addresses.readOneAddress(req.params.id)
     .then( address => res.send(address))
     .catch( next );
 });
