@@ -27,7 +27,7 @@ const Products = ({ products, addToCart, lineItems })=> {
                     <div className='m-0'>Available Quantity: {product.quantity - inCartQuantity(product.id, lineItems)}</div>
                   </span>
                   <span>
-                    <button disabled = {disableButton} onClick={ ()=> addToCart(product.id)} className='btn btn-success w-100 mt-2'>Add to Cart</button>                  
+                    <button disabled = {disableButton} onClick={ ()=> addToCart(product.id)} className='btn btn-success w-100 mt-2 text-white'>Add to Cart</button>                  
                   </span>
                   <span className='m-0'>
                     ${Number(product.price).toFixed(2)}
