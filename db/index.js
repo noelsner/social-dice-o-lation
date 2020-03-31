@@ -110,10 +110,16 @@ const sync = async()=> {
       imageURL: 'https://images-na.ssl-images-amazon.com/images/I/61opBp2cmLL._SX466_.jpg',
       description: 'Codenames is a social word game with a simple premise and challenging game play. Two rival spymasters know the secret identities of 25 agents. Their teammates know the agents only by their codenames. The teams compete to see who can make contact with all of their agents first. Spymasters give one-word clues that can point to multiple words on the table. Their teammates try to guess words of their color while avoiding those that belong to the opposing team. And everyone wants to avoid the assassin. The game works very well with 4 players if you prefer to guess without help. Or you can add more players if you prefer lively discussion. There is also a cooperative variant where a single team tries to achieve the highest score they can by playing against the game itself.'
     },
+    pandemic: {
+      name: 'Pandemic',
+      price: 49.99,
+      imageURL: 'https://mk0brilliantmaptxoqs.kinstacdn.com/wp-content/uploads/Pandemic-board-game-600x600.jpg?p=3053',
+      description: 'Pandemic is based on the premise that four diseases have broken out in the world, each threatening to wipe out a region. The game accommodates two to four players, each playing one of seven possible specialists: dispatcher, medic, scientist, researcher, operations expert, contingency planner, or quarantine specialist. Through the combined effort of all the players, the goal is to discover all four cures before any of several game-losing conditions are reached.'
+    },
     yahtzee: {
       name: 'Yahtzee',
       price: 7.99,
-      imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSZ-uTDlEUC8i15MIf3l_OXozcSOX3DjX1oz5Gg_CDlr9LnObXr',
+      imageURL: 'https://i5.walmartimages.com/asr/56d38936-8c96-4a7f-9725-4439f2abc5a3_1.b584f3c52295ea0456b63ab3b5d9de22.jpeg',
       description: "Take turns rolling dice to try to score combos. You get a total of 13 turns and may roll up to three times on a turn. At the end of each turn, you must fill in one empty box in your column on the score card. The player with the highest grand total at the end of all 13 rounds wins. It's up to the player whether they hustle for a full house or risk it all for a Yahtzee roll. Show it off, and let the dice fall where they may. Game includes 5 dice and shaker that doubles as storage for easy clean up and travel. Yahtzee is a trademark of Hasbro."
     },
     lcr: {
@@ -121,6 +127,12 @@ const sync = async()=> {
       price: 6.99,
       imageURL: 'https://images-na.ssl-images-amazon.com/images/I/51Z6zPuHmfL.jpg',
       description: "LCR Left Center Right is a fun, fast-paced dice game that you won't be able to put down! Each game includes 3 specialty marked LCR dice, 24 playing chips and instructions. Players roll the dice to determine where they pass their chips. The last player with chips is the winner and wins the center pot."
+    },
+    plague: {
+      name: 'Plague Inc.',
+      price: 39.99,
+      imageURL: 'https://d8mkdcmng3.imgix.net/a930/board-games-party-and-family-plague-inc-the-board.jpg?auto=format&bg=0FFF&fit=fill&h=600&q=100&w=600&s=71977063e4433a1aedbc11d01af2a0c4',
+      description: "A strategic game of infection, evolution and extinction for 1-4 players lasting 60-90 minutes. Each person takes on the role of a deadly disease competing against their friends in a battle to be the first to infect and wipe out the world!"
     },
     farkle: {
       name: 'Farkle',
@@ -151,6 +163,18 @@ const sync = async()=> {
       price: 24.99,
       imageURL: 'https://www.gamesworld.com.au/wp-content/uploads/2017/08/monopoly-17-1.jpg',
       description:"It's the fast-dealing property trading game where players buy, sell, dream and scheme their way to riches. This version of the Monopoly game welcomes the Rubber Ducky, Tyrannosaurus Rex, and Penguin into its family of tokens. Choose your token, place it on GO! and roll the dice to own it all! There can be only one winner in the Monopoly game. Will it be you? Monopoly is a trademark of Hasbro."
+    },
+    shutTheBox: {
+      name: 'Shut the Box',
+      price: 17.99,
+      imageURL: 'https://i5.walmartimages.com/asr/54e83ea5-6e89-4ae9-93ae-70a8338bdab1_1.d10fedd33dcdf9081eb2e74f725bc4c9.jpeg',
+      description:'A traditional English Pub game of dice and numbers. Roll the dice and lay down the matching numbered tiles. Players can challenge each other for lowest score. Lay down all the tiles and you have "Shut the Box!"'
+    },
+    taboo: {
+      name: 'Taboo',
+      price: 19.99,
+      imageURL: 'https://5.imimg.com/data5/DZ/OE/UE/SELLER-40336933/taboo-500x500.jpg',
+      description:"Players try to get teammates to say the Guess word on the card without using any of the Taboo words in the clues. If the describer says a Taboo word listed on the card while giving the clues, they'll get interrupted with the electronic buzzer and lose a turn. Players keep the cards that were guessed correctly, and the team with the most cards wins the game."
     },
   };
 
