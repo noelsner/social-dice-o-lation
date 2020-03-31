@@ -34,8 +34,8 @@ const ListAddresses = ({userId}) => {
                                     <input type="radio" aria-label="Radio button for following text input"></input>
                                 </div>
                             </div>
-                            <div className = "card-body">
-                                <span>{address.address1} </span><br/>
+                            <div className = "card card-body">
+                                <span>{address.address1} </span>
                                 {address.address2 && <span>{address.address2}</span>} 
                                 <span>{address.city}, {address.state} {address.zipCode} </span> 
                             </div>

@@ -20,7 +20,7 @@ const Orders = ({ lineItems, orders, products, completedOrders })=> {
                     <tr>
                       <th className='d-flex justify-content-between'>
                         <h5>
-                          OrderID: { order.id.slice(0, 4) }
+                          <a href = {`#view=orders&order=${order.id}`} >OrderID: { order.id.slice(0, 4) }</a>
                         </h5>
                         <h5>
                           Order Date: {moment(order.createdAt).format('L')} 

@@ -93,6 +93,7 @@ const App = () => {
     });
   }, []);
   //************* Test for Completed Orders Route  **********/
+  /*
   useEffect(() => {
     if (auth.id) {
     axios.get('/api/getCompletedOrders', headers())
@@ -100,7 +101,7 @@ const App = () => {
       .catch(ex => console.log(ex))
     }
   }, [auth]);
-
+  */
   //*****************************************************/
   
 
