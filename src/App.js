@@ -216,7 +216,7 @@ const App = () => {
           {
             view === 'checkout' && (
               <div>
-                <Checkout auth={auth} lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
+                <Checkout auth={auth} lineItems={lineItems} removeFromCart={removeFromCart} cart={cart} setCart = {setCart} createOrder={createOrder} products={products} updateLineItems = {updateLineItems} />
               </div>
             )
           }

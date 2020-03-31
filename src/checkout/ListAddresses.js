@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-const ListAddresses = ({userId}) => {
+const ListAddresses = ({userId, cart, setCart}) => {
 
     const [addresses, setAddresses] = useState([]);
 
@@ -19,19 +19,26 @@ const ListAddresses = ({userId}) => {
         .then(response => setAddresses(response.data))
     }, [])
 
+    const addAddress = (addressId) => {
+        console.log(cart);
+        console.log(addressId);
+        setCart({...cart, addressId: addressId});
+    };
+
+
     return (
         <div>
             <label>Choose Shipping Address</label>
             <form className="d-flex align-items-center">
             {
             addresses.map(address => {
-                console.log(address);
+                
                 return (
-                    <div > 
-                        <div key = {address.id} className = "input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input type="radio" aria-label="Radio button for following text input"></input>
+                    <div key = {address.id}> 
+                        <div  className = "input-group">
+                            <div className="input-group-prepend">
+                                <div className="input-group-text"> 
+                                    <input type="radio" name="address" aria-label="Radio button for following text input" onClick = {()=>addAddress(address.id)}></input>
                                 </div>
                             </div>
                             <div className = "card card-body">

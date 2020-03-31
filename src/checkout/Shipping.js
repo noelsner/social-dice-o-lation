@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ListAddresses from './ListAddresses';
 
-const Shipping = ({auth}) => {
+const Shipping = ({auth, cart, setCart}) => {
   const [firstName, setFirstName] = useState(auth.firstName);
   const [lastName, setLastName] = useState(auth.lastName);
   const [address, setAddress] = useState({
@@ -114,7 +114,7 @@ const Shipping = ({auth}) => {
           </div>
         </div>
 
-        <ListAddresses userId = {auth.id}/>
+        <ListAddresses userId = {auth.id} cart = {cart} setCart = {setCart}/>
 
         <div>
           <div className='form-group'>

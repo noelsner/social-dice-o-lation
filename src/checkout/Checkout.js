@@ -4,7 +4,7 @@ import Payment from './Payment';
 import OrderSummary from './OrderSummary';
 import ConfirmOrder from './ConfirmOrder';
 
-const Checkout = ({ auth, lineItems, cart, createOrder, removeFromCart, products, updateLineItems, orders }) => {
+const Checkout = ({ auth, lineItems, cart, setCart, createOrder, removeFromCart, products, updateLineItems, orders }) => {
   return (
     <div className='row'>
 
@@ -12,7 +12,7 @@ const Checkout = ({ auth, lineItems, cart, createOrder, removeFromCart, products
       <div className='col-sm-12 col-md-7'>
         <div className='bg-light mx-4 mb-4 px-4 pt-4 w-100'>
           <h4>Shipping Details</h4>
-          <Shipping auth={auth}/>
+          <Shipping auth={auth} cart= {cart} setCart = {setCart}/>
         </div>
         <div className='bg-light m-4 p-4 w-100'>
           <h4>Payment Method</h4>
