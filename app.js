@@ -75,6 +75,14 @@ app.get('/api/getOrders', (req, res, next)=> {
     .catch( next );
 });
 
+app.put('/api/updateOrder', (req, res, next)=> {
+  console.log('********** DB.updateOrder intiated **********');
+  console.log(req.body);
+  db.models.orders.update(req.body)
+    .then( order => res.send(order))
+    .catch( next );
+});
+
 app.post('/api/createOrder', (req, res, next)=> {
   console.log('********** DB.createOrder intiated **********');
   db.createOrder(req.user.id)

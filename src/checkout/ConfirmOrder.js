@@ -16,6 +16,7 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
   };
 
   const [confirmAddress, setConfirmAddress] = useState('');
+  const [addressError, setAddressError] = useState('No Address Specified');
   
   useEffect( ()=> {
     console.log('Confirm checkout');
@@ -36,6 +37,17 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
     subTotal += ((product.price)*(lineItem.quantity));
   });
   const ConfirmedAddress = ()=> {
+
+    axios.put('api/updateOrder', cart, headers())
+      .then( (response)=> {
+        console.log(response.data)
+        
+      })
+      .catch(ex=> { console.log(ex)}
+        
+        )
+
+
     return(
       <div>
         {confirmAddress.address1}
@@ -48,8 +60,8 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
   };
   return (
     <div>
-      <h3> Ship to: </h3>
-      {!cart.addressId && <h4>No address specified</h4>}
+      <h4> Ship to: </h4>
+      {!cart.addressId && <h4>{addressError}</h4>}
       {cart.addressId && <ConfirmedAddress />}
       <div className='mx-auto mt-4'>
         <div className='d-flex justify-content-center'>
