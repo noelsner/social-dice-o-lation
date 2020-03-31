@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ListAddresses from './ListAddresses';
 
 const Shipping = ({auth}) => {
   const [firstName, setFirstName] = useState(auth.firstName);
@@ -40,6 +41,7 @@ const Shipping = ({auth}) => {
 
   function fillInAddress() {
     var place = autocomplete.getPlace().address_components;
+    
     setAddress({
       address1: `${place[0].short_name} ${place[1].short_name}`,
       city: place[3].short_name,
@@ -88,8 +90,9 @@ const Shipping = ({auth}) => {
         }
       };
     };
-    console.log(address);
+
     const newAddress = {...address};
+    console.log(newAddress);
     newAddress.userId = auth.id;
     axios.post('/api/addresses', newAddress, headers())
       .then(res => console.log(res.data))
@@ -111,8 +114,11 @@ const Shipping = ({auth}) => {
           </div>
         </div>
 
+        <ListAddresses userId = {auth.id}/>
+
         <div>
           <div className='form-group'>
+            <label> Or Enter New Shipping Address</label>
             {/* <label htmlFor="autocomplete">Address</label> */}
             <input type="text" className="form-control mb-2" id="autocomplete" placeholder="Start typing the first line of your address" ref={el => input=el}></input>
             <button className='btn btn-link' type='button' data-toggle='collapse' data-target='#manualAddress' aria-expanded='false' aria-controls='manualAddress'>Enter Address Manually</button>
@@ -145,8 +151,8 @@ const Shipping = ({auth}) => {
         </div>
 
         <div>
-          <button className='btn btn-dark mb-4' type='button'>Save Address</button>
-          <button onClick = {(ev)=> saveAddress(ev)}> Testing Save Address (Remove)</button>
+          <button className='btn btn-secondary mb-4' type='button'>Save Address</button>
+          <br/><button onClick = {(ev)=> saveAddress(ev)}> Testing Save Address (Remove)</button>
         </div>
 
       </form>
