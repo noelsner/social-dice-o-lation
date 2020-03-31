@@ -82,6 +82,19 @@ app.post('/api/createOrder', (req, res, next)=> {
     .catch( next );
 });
 
+app.get('/api/addresses', (req, res, next)=> {
+  db.models.addresses.read()
+    .then( address => res.send(address))
+    .catch( next );
+});
+
+app.get('/api/userAddress/:id', (req, res, next)=> {
+  console.log(req.params.id);
+  db.models.addresses.readOneUser(req.params.id)
+    .then( address => res.send(address))
+    .catch( next );
+});
+
 app.post('/api/addresses', (req, res, next)=> {
   console.log('********** Adding new Address now **********');
   db.models.addresses.create(req.body)

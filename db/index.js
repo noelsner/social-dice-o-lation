@@ -74,7 +74,7 @@ const sync = async()=> {
       city VARCHAR(100),
       state VARCHAR(50),
       country VARCHAR(50),
-      "zipCode" INTEGER
+      "zipCode" VARCHAR(50)
     );
   `;
   await client.query(SQL);
@@ -166,6 +166,15 @@ const sync = async()=> {
     country: "United States",
     zipCode: "91770"
   });
+
+  await addresses.create({ 
+    userId: moe.id,
+    address1: "1 Infinite Loop",
+    city: "Cupertino",
+    state: "CA",
+    country: "United States",
+    zipCode: "95014"
+  });
   
   await addresses.create({ 
     userId: lucy.id,
@@ -174,6 +183,15 @@ const sync = async()=> {
     state: "CA",
     country: "United States",
     zipCode: "94043"
+  });
+
+  await addresses.create({ 
+    userId: lucy.id,
+    address1: "1601 Willow Rd",
+    city: "Menlo Park",
+    state: "CA",
+    country: "United States",
+    zipCode: "94025"
   });
 
   const _orders = {
