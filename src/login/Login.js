@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 
 const Login = ({ login })=> {
   const [ username, setUsername ] = useState('');
@@ -10,16 +10,15 @@ const Login = ({ login })=> {
       .catch(ex => setError(ex.response.data.message));
   }
   return (
-    <div className='login-container'>
-      <form className='login-form' onSubmit={ onSubmit } >
-        <h1>Login</h1>
+    <div className='login-container bg-primary'>
+      <form className='login-form bg-white w-50' onSubmit={ onSubmit } >
+        <h2>Login</h2>
         {error && (
           <div className='alert alert-danger'>{ error }</div>
         )}
         <input type='username' className='form-control' placeholder='Username' value={ username } onChange={ ev => setUsername(ev.target.value) } />
         <input type='password' className='form-control' placeholder='Password' value={ password } onChange={ ev => setPassword(ev.target.value) } />
-        <button className='btn btn-primary w-50'>Login</button>
-        <div>Dont have an account? Create one <a href='#view=createUser'>here</a></div>
+        <button className='btn btn-success w-50 text-white'>Login</button>
       </form>
     </div>
   );

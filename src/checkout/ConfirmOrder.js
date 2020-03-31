@@ -1,6 +1,9 @@
 import React from 'react';
 
 const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
+
+  console.log('cart.id :', cart.id);
+  console.log('oldCartId :', oldCartId);
   let shipping = 0;
   let subTotal = 0;
 
@@ -24,7 +27,7 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
             <h4 className='font-weight-bolder'>${Number(subTotal + shipping).toFixed(2)}</h4>
           </div>
         </div>
-        <button id='checkout-btn' type='button' className='btn btn-success w-100 mt-2' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )} onClick={ createOrder } data-toggle='modal' data-target='#orderConfirmation'>Checkout</button>              
+        <button id='checkout-btn' type='button' className='btn btn-success w-100 mt-2 text-white' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )} onClick={ createOrder } data-toggle='modal' data-target='#orderConfirmation'>Checkout</button>              
       </div>
 
       <div className="modal fade" id="orderConfirmation" tabIndex="-1" role="dialog" aria-labelledby="orderConfirmationTitle" aria-hidden="true">
@@ -37,11 +40,34 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
               </button>
             </div>
             <div className="modal-body">
-              ...
+              <ul className=''>
+                {orders && 
+                (
+                  lineItems.filter( lineItem => lineItem.orderId === orders.id ).map( lineItem => {
+                    const product = products.find( product => product.id === lineItem.productId)
+                    return (
+                      <li key={ lineItem.id }>
+                        <div className=''>
+                          <div className='media'>
+                            <a href={`#view=product&id=${product.id}`} className='thumbnail pull-left'><img className='cart-product-img media-object' src={product.imageURL} /></a>
+                            <div className='ml-2'>
+                              <h6><a href={`#view=product&id=${product.id}`}>{product.name}</a></h6>
+                              <div>
+                                <span>${Number(product.price).toFixed(2)} </span>
+                                Qty: {lineItem.quantity}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })
+                )}
+              </ul>
             </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <a href='#view=orders'><button type="button" className="btn btn-primary" >Go to order history</button></a>
+            <div className="modal-footer d-flex justify-content-between align-items-center">
+              <div>Your order will now appear in your <a href='#view=orders'>order history</a></div>
+              <button type="button" className="btn btn-dark" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>

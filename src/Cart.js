@@ -14,11 +14,11 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
       )
     } else if(product.quantity <= 3){
       return (
-        <span className='text-warning'>Low Inventory. {product.quantity} Items Left</span>
+        <span className='text-danger'>Low Inventory. {product.quantity} Items Left</span>
       )
     } else if(product.quantity > 3){
       return (
-        <span className='text-success'>In Stock</span>
+        <span className='text-primary'>In Stock</span>
       )
     };
   };
@@ -83,7 +83,7 @@ const Cart = ({ lineItems, cart, createOrder, removeFromCart, products, updateLi
             </div>
             <div className='d-flex flex-column mt-4'>
               <a href='#view=checkout' className='d-flex justify-content-center'><button id='checkout-btn' type='button' className='btn btn-primary w-100' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )}>Checkout</button></a>              
-              <a className='text-secondary text-center mt-2' href='#view=products'>Continue Shopping</a>
+              <a className='text-primary text-center mt-2' href='#view=products'>Continue Shopping</a>
             </div>
           </div>
         </div>

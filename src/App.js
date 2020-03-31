@@ -26,6 +26,7 @@ const App = () => {
   const [cart, setCart] = useState({});
   const [products, setProducts] = useState([]);
   const [lineItems, setLineItems] = useState([]);
+  const [completedOrders, setCompletedOrders] = useState([]);
 
   useEffect(() => {
     axios.get('/api/products').then((response) => setProducts(response.data));
@@ -95,7 +96,7 @@ const App = () => {
   useEffect(() => {
     if (auth.id) {
     axios.get('/api/getCompletedOrders', headers())
-      .then(response => console.log(response.data))
+      .then(response => setCompletedOrders(response.data))
       .catch(ex => console.log(ex))
     }
   }, [auth]);
@@ -164,12 +165,12 @@ const App = () => {
       <div>
         {
           !view && (
-            <Login login={login} />
+            <CreateUser createUser={createUser} />
           )
         }
         {
-          view === 'createUser' && (
-            <CreateUser createUser={createUser} />
+          view === 'login' && (
+            <Login login={login} />
           )
         }
       </div>
@@ -198,7 +199,7 @@ const App = () => {
           {
             view === 'orders' && (
               <div>
-                <Orders lineItems={lineItems} products={products} orders={orders} />
+                <Orders lineItems={lineItems} products={products} orders={orders} completedOrders={completedOrders} />
               </div>
             )
           }
