@@ -2,8 +2,6 @@ import React from 'react';
 
 const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
 
-  console.log('cart.id :', cart.id);
-  console.log('oldCartId :', oldCartId);
   let shipping = 0;
   let subTotal = 0;
 

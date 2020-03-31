@@ -18,14 +18,14 @@ const CreateUser = ({createUser}) => {
   };
 
   return (
-    <div className=''>
+    <div className='bg-primary'>
       
       <div className='row justify-content-end new-user-container'>
         <div className='col-md-6 landing-container my-auto'>
           <div className='align-items-start'>
             <h1 className='text-white'>Social Dice-O-Lation</h1>
             <h3 className='text-success'>Quarantine doesn't have to be boring.</h3>
-            <h3 className='text-success'>Find fun games to stay entertained and social with whoever you are quarentined with.</h3>
+            <h3 className='text-success'>Stay entertained and socialize with whoever you are quarentined with.</h3>
           </div>
         </div>
         <div className='col-md-5 my-auto mr-md-4'>
