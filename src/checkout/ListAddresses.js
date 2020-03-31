@@ -20,11 +20,8 @@ const ListAddresses = ({userId, cart, setCart}) => {
     }, [])
 
     const addAddress = (addressId) => {
-        console.log(cart);
-        console.log(addressId);
         setCart({...cart, addressId: addressId});
     };
-
 
     return (
         <div>

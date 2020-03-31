@@ -62,8 +62,8 @@ const Shipping = ({auth, cart, setCart}) => {
     //   }
     // }
   }
-  console.log('address :', address);
-  console.log('address1 :', address1);
+  //console.log('address :', address);
+  //console.log('address1 :', address1);
   // function geolocate() {
   //   if (navigator.geolocation) {
   //     navigator.geolocation.getCurrentPosition(function(position) {
@@ -92,7 +92,6 @@ const Shipping = ({auth, cart, setCart}) => {
     };
 
     const newAddress = {...address};
-    console.log(newAddress);
     newAddress.userId = auth.id;
     axios.post('/api/addresses', newAddress, headers())
       .then(res => console.log(res.data))
