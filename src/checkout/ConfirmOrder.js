@@ -40,14 +40,9 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
 
     axios.put('api/updateOrder', cart, headers())
       .then( (response)=> {
-        console.log(response.data)
-        
+        console.log(response.data)  
       })
-      .catch(ex=> { console.log(ex)}
-        
-        )
-
-
+      .catch(ex=> { console.log(ex)})
     return(
       <div>
         {confirmAddress.address1}
