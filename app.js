@@ -4,9 +4,11 @@ const path = require('path');
 const db = require('./db');
 const models = db.models;
 const jwt = require('jwt-simple');
+const ejs = require('ejs');
 
 require('dotenv').config()
-// console.log(process.env.GOOGLE_API)
+const GOOGLE_API_KEY = process.env.GOOGLE_API;
+app.engine('html', ejs.renderFile);
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
@@ -46,7 +48,7 @@ app.use((req, res, next)=> {
     });
 });
 
-app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/', (req, res, next)=> res.render(path.join(__dirname, 'index.html'), {FOO: 'BAR', GOOGLE_API_KEY}));
 
 
 app.post('/api/auth', (req, res, next)=> {
