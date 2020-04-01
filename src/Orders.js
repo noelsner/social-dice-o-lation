@@ -1,8 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from 'moment';
+import axios from 'axios';
 
 
-const Orders = ({ lineItems, orders, products, completedOrders })=> {
+const Orders = ({ lineItems, orders, products})=> {
+
+  const [completedOrders, setCompletedOrders] = useState([]);
+  const headers = () => {
+    const token = window.localStorage.getItem('token');
+    return {
+      headers: {
+        authorization: token
+      }
+    };
+  };
+
+  useEffect( ()=> {
+    axios.get('/api/getCompletedOrders', headers())
+      .then( response => setCompletedOrders(response.data))
+      .catch(ex => console.log(ex))
+  },[]);
+
+  console.log(completedOrders);
   return (
     <div className='container'>
       <div className='row'>
