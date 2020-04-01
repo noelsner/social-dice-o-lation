@@ -21,13 +21,13 @@ const Orders = ({ lineItems, orders, products})=> {
       .catch(ex => console.log(ex))
   },[]);
 
-  console.log(completedOrders);
+  console.log(orders);
   return (
     <div className='container'>
       <div className='row'>
         <div className='col-sm-12 col-md-12 col-md-offset-2'>
           {
-            orders.map( order => {
+            orders.filter(order => order.status === 'ORDER').map( order => {
               const _completedOrders = completedOrders.filter(completedOrder => completedOrder.orderId === order.id);
               let total = _completedOrders.reduce((acc, comOrder) => {
                 acc += (comOrder.orderPrice * comOrder.quantity)
