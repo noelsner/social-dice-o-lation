@@ -5,6 +5,7 @@ import ListAddresses from './ListAddresses';
 const Shipping = ({auth, cart, setCart}) => {
   const [firstName, setFirstName] = useState(auth.firstName);
   const [lastName, setLastName] = useState(auth.lastName);
+  const [addressList, setAddressList] = useState([]);
   const [address, setAddress] = useState({
     address1: '',
     address2: '',
@@ -15,6 +16,20 @@ const Shipping = ({auth, cart, setCart}) => {
   });
   const [address1, setAddress1] = useState('');
   
+  const headers = () => {
+    const token = window.localStorage.getItem('token');
+    return {
+      headers: {
+        authorization: token
+      }
+    };
+  };
+
+  useEffect( ()=> {
+    axios.get(`/api/userAddress/${auth.id}`, headers())
+    .then(response => setAddressList(response.data))
+}, [])
+
   let input;
   useEffect(() => {
     initAutocomplete(input);
@@ -82,19 +97,14 @@ const Shipping = ({auth, cart, setCart}) => {
     ev.preventDefault();
     console.log('***** Saving Address *****');
     
-    const headers = () => {
-      const token = window.localStorage.getItem('token');
-      return {
-        headers: {
-          authorization: token
-        }
-      };
-    };
-
     const newAddress = {...address};
     newAddress.userId = auth.id;
     axios.post('/api/addresses', newAddress, headers())
-      .then(res => console.log(res.data))
+      .then(res => {
+        console.log('Address successfully added to DB')
+        console.log(res.data);
+        setAddressList([res.data, ...addressList]);
+      })
       .catch(ex => console.log(ex));
     
   };
@@ -113,7 +123,7 @@ const Shipping = ({auth, cart, setCart}) => {
           </div>
         </div>
 
-        <ListAddresses userId = {auth.id} cart = {cart} setCart = {setCart}/>
+        <ListAddresses cart = {cart} setCart = {setCart} addressList = {addressList}/>
 
         <div>
           <div className='form-group'>
