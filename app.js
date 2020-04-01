@@ -9,7 +9,6 @@ const ejs = require('ejs');
 require('dotenv').config()
 const GOOGLE_API_KEY = process.env.GOOGLE_API;
 app.engine('html', ejs.renderFile);
-console.log('api:', GOOGLE_API_KEY)
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
