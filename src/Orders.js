@@ -6,6 +6,7 @@ import axios from 'axios';
 const Orders = ({ lineItems, orders, products})=> {
 
   const [completedOrders, setCompletedOrders] = useState([]);
+  const [addresses, setAddresses] = useState([]);
   const headers = () => {
     const token = window.localStorage.getItem('token');
     return {
@@ -21,6 +22,12 @@ const Orders = ({ lineItems, orders, products})=> {
       .catch(ex => console.log(ex))
   },[]);
 
+  useEffect( ()=> {
+    axios.get('/api/Addresses', headers())
+      .then( response => setAddresses(response.data))
+      .catch(ex => console.log(ex))
+  },[]);
+
   console.log(orders);
   return (
     <div className='container'>
@@ -28,6 +35,7 @@ const Orders = ({ lineItems, orders, products})=> {
         <div className='col-sm-12 col-md-12 col-md-offset-2'>
           {
             orders.filter(order => order.status === 'ORDER').map( order => {
+              const address = addresses.find(address => address.id === order.addressId);
               const _completedOrders = completedOrders.filter(completedOrder => completedOrder.orderId === order.id);
               let total = _completedOrders.reduce((acc, comOrder) => {
                 acc += (comOrder.orderPrice * comOrder.quantity)
@@ -48,6 +56,18 @@ const Orders = ({ lineItems, orders, products})=> {
                           Order Total: ${Number(total).toFixed(2)}
                         </h5>
                       </th>
+                    </tr>
+                    <tr>
+                      <td>
+                      {
+                      address && `Shipping to: 
+                                  ${address.address1} 
+                                  ${address.city}, 
+                                  ${address.state}
+                                  ${address.zipCode}
+                                  `
+                      }
+                      </td>
                     </tr>
                   </thead>
                   <tbody>

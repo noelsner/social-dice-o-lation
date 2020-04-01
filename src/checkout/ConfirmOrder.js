@@ -71,7 +71,7 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
             <h4 className='font-weight-bolder'>${Number(subTotal + shipping).toFixed(2)}</h4>
           </div>
         </div>
-        <button id='checkout-btn' type='button' className='btn btn-success w-100 mt-2 text-white' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id )} onClick={ createOrder } data-toggle='modal' data-target='#orderConfirmation'>Checkout</button>              
+        <button id='checkout-btn' type='button' className='btn btn-success w-100 mt-2 text-white' disabled={ !lineItems.find( lineItem => lineItem.orderId === cart.id ) || !cart.addressId} onClick={ createOrder } data-toggle='modal' data-target='#orderConfirmation'>Checkout</button>              
       </div>
 
       <div className="modal fade" id="orderConfirmation" tabIndex="-1" role="dialog" aria-labelledby="orderConfirmationTitle" aria-hidden="true">
