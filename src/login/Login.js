@@ -7,6 +7,7 @@ const Login = ({ login })=> {
   const onSubmit = (ev)=> {
     ev.preventDefault();
     login({ username, password })
+      .then(()=> window.location = '#')
       .catch(ex => setError(ex.response.data.message));
   }
   return (
