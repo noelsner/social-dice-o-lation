@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 
 const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
 
@@ -111,7 +112,7 @@ const ConfirmOrder = ({lineItems, cart, createOrder, products, orders}) => {
             </div>
             <div className="modal-footer d-flex justify-content-between align-items-center">
               <div>Your order will now appear in your <a href='#view=orders'>order history</a></div>
-              <button type="button" className="btn btn-dark" data-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-dark" data-dismiss="modal" onClick = {()=> window.location = '#'}>Close</button>
             </div>
           </div>
         </div>

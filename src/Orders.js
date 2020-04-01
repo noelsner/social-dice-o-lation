@@ -64,8 +64,7 @@ const Orders = ({ lineItems, orders, products})=> {
                                   ${address.address1} 
                                   ${address.city}, 
                                   ${address.state}
-                                  ${address.zipCode}
-                                  `
+                                  ${address.zipCode}`
                       }
                       </td>
                     </tr>
